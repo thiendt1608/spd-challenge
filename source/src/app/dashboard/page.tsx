@@ -60,12 +60,12 @@ export default function Home() {
     <main>
       {/* Hero Band (Dark) */}
       <SectionBand variant="dark" className="pt-12 pb-16">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16 bg-black/50 backdrop-blur-md rounded-adyen p-8">
           <MonoEyebrow className="justify-center mb-6">ADYEN EMERGENCY SQUAD (AES)</MonoEyebrow>
           <h1 className="text-[48px] md:text-[64px] font-medium leading-tight tracking-tight mb-6">
             IT Rescue Team Matcher.
           </h1>
-          <p className="text-xl text-white/70">
+          <p className="text-xl text-white/90">
             Hãy ra lệnh cho AI. Chúng tôi sẽ tìm đội hình hoàn hảo cho bạn.
           </p>
         </div>
