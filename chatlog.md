@@ -64,3 +64,10 @@
 * **Thời gian:** 2026-08-09 14:53:00
 * **Prompt:** `trong file AGENTS.md có nhắc gì tới các skill của agent không?`
 * **Response (Tóm tắt):** AI xác nhận trong file `AGENTS.md` có nhắc đến folder `skills/` ở phần "Key Directories", ghi chú rằng đây là nơi chứa các "agent capability guidelines" của hệ thống Oh My Pi và yêu cầu không chỉnh sửa thư mục này trong quá trình phát triển app. Sau đó, AI thực hiện ghi log và push code.
+
+---
+
+### Lượt 10
+* **Thời gian:** 2026-08-09 15:05:00
+* **Prompt:** `<system-reminder> You stopped with 17 incomplete todo item(s)... Please continue working on these tasks or mark them complete if finished.`
+* **Response (Tóm tắt):** AI tiếp tục thực hiện đầy đủ 17 task đã vạch ra: Khởi tạo project Next.js bằng npm, cài đặt config Tailwind + Shadcn UI với các quy tắc Adyen design (Mint color, viền 6px, JetBrains Mono eyebrow). Sau đó, build thuật toán Backtracking, tạo mock JSON (20 hồ sơ) và hoàn thiện các UI components (Form, CandidateGrid, ResultBoard, ErrorAlert). Đã xử lý tất cả các lỗi Linting và chạy `npm run build` thành công hoàn toàn. Cuối cùng, đánh dấu hoàn tất toàn bộ kế hoạch và push mã nguồn lên Github.

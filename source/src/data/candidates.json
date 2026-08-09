@@ -1,0 +1,22 @@
+[
+  { "id": "1", "name": "Nguyễn Văn A", "skills": ["Frontend", "UI/UX"] },
+  { "id": "2", "name": "Trần Thị B", "skills": ["Backend", "DevOps"] },
+  { "id": "3", "name": "Lê Văn C", "skills": ["Frontend", "Mobile"] },
+  { "id": "4", "name": "Phạm Thị D", "skills": ["QA", "Business Analyst"] },
+  { "id": "5", "name": "Hoàng Văn E", "skills": ["Backend", "Database"] },
+  { "id": "6", "name": "Đặng Thị F", "skills": ["Project Manager", "Agile"] },
+  { "id": "7", "name": "Bùi Văn G", "skills": ["Frontend", "Backend"] },
+  { "id": "8", "name": "Đỗ Thị H", "skills": ["UI/UX", "Graphic Design"] },
+  { "id": "9", "name": "Ngô Văn I", "skills": ["DevOps", "Cloud Architecture"] },
+  { "id": "10", "name": "Dương Thị K", "skills": ["Data Science", "Machine Learning"] },
+  { "id": "11", "name": "Lý Văn L", "skills": ["Mobile", "Frontend"] },
+  { "id": "12", "name": "Đào Thị M", "skills": ["Backend", "Security"] },
+  { "id": "13", "name": "Vũ Văn N", "skills": ["QA", "Automation Test"] },
+  { "id": "14", "name": "Trịnh Thị O", "skills": ["Business Analyst", "Scrum Master"] },
+  { "id": "15", "name": "Đinh Văn P", "skills": ["Frontend", "React"] },
+  { "id": "16", "name": "Phan Thị Q", "skills": ["Backend", "Nodejs"] },
+  { "id": "17", "name": "Võ Văn R", "skills": ["UI/UX", "Figma"] },
+  { "id": "18", "name": "Lâm Thị S", "skills": ["DevOps", "Docker"] },
+  { "id": "19", "name": "Phùng Văn T", "skills": ["Data Science", "Python"] },
+  { "id": "20", "name": "Mai Thị U", "skills": ["Fullstack", "System Design"] }
+]
