@@ -1,54 +1,166 @@
 # Adyen Emergency Squad (AES) - IT Rescue Team Matcher
+
 **SPD Challenge 2026 - Hackathon Solution**
+**Team:** syncx | **Team Code:** TEAM-TPV2FP
 
-## 🚀 Project Overview
-**Adyen Emergency Squad (AES)** is an intelligent, Agentic AI-powered team-matching platform designed for high-stakes IT project rescues. Born out of the 6-hour **SPD Challenge 2026 Hackathon**, this MVP bypasses traditional dropdown filters and replaces them with a cutting-edge **"Text-to-Team" NLP pipeline**.
+---
 
-By leveraging advanced combinatorial algorithms and large language models (LLMs), AES automatically forms the most cost-efficient, culture-fit squad from an available talent pool based on natural language constraints.
+## 1. Tên và Mô tả ngắn
 
-## ✨ Killer Features
+**Adyen Emergency Squad (AES)** là một nền tảng ghép đội thông minh, sử dụng Agentic AI để tự động xây dựng đội hình IT tối ưu từ ngôn ngữ tự nhiên. Người dùng chỉ cần mô tả yêu cầu bằng văn bản, hệ thống sẽ phân tích và trả về đội hình phù hợp nhất.
 
-### 1. 🗣️ Text-to-Team (Natural Language Parsing)
-No more rigid forms. Users simply type what they need in plain text: 
+## 2. Bài toán giải quyết
+
+Trong các tình huống khẩn cấp về IT (sự cố hệ thống, dự án cần rescue), việc tìm và ghép đội hình phù hợp thường tốn thời gian do phải lọc thủ công qua nhiều tiêu chí: kỹ năng chuyên môn, thời gian rảnh, ngoại ngữ, phong cách làm việc...
+
+**AES** giải quyết bài toán này bằng cách:
+- Thay thế các bộ lọc dropdown truyền thống bằng giao diện **Text-to-Team** (nhập ngôn ngữ tự nhiên).
+- Tự động bóc tách (parse) yêu cầu thành các ràng buộc có cấu trúc (JSON constraints).
+- Áp dụng thuật toán **Generalized Set Cover** kết hợp **AI Semantic Routing** để tìm đội hình tối ưu về chi phí và văn hóa làm việc.
+
+## 3. Danh sách tính năng chính
+
+### 3.1. Text-to-Team (Natural Language Parsing)
+Người dùng nhập yêu cầu bằng văn bản tự nhiên:
 > *"Cần 1 team tối đa 3 người, rảnh rỗi vào Ca Sáng, chuyên môn là Python và giỏi Tiếng Anh"*
 
-Our **Gemini-powered NLP API** (with a secure Regex client-side fallback) extracts this text into strict JSON constraints (`maxMembers`, `reqSkills`, `reqLangs`, `reqAvail`).
+Hệ thống dùng **Gemini API** (kèm Regex fallback phía client) để trích xuất thành JSON constraints: `maxMembers`, `reqSkills`, `reqLangs`, `reqAvail`.
 
-### 2. 🧠 AI Semantic Routing & Ontology Mapping
-When a user asks for generic terms like "AI" or "Web", the system doesn't rely on dumb string matching. The AI Semantically Routes the intent, mapping it to exact database tags (e.g., `["RAG", "Machine Learning"]` or `["React", "Svelte"]`).
+### 3.2. AI Semantic Routing & Ontology Mapping
+Khi người dùng yêu cầu các thuật ngữ chung chung như "AI" hay "Web", hệ thống không khớp chuỗi đơn giản mà sử dụng AI để ánh xạ ngữ nghĩa sang các tag chính xác trong cơ sở dữ liệu (VD: `"AI"` → `["RAG", "Machine Learning"]`).
 
-### 3. ⚙️ Generalized Set Cover Algorithm (The Brains)
-Our custom two-stage matching engine powers the selection process:
-- **Stage 1 (Pre-processing):** Drops unavailable candidates and enforces **Intersection Constraints** (e.g., if "Ca Sáng" is required, every member must have "Ca Sáng" availability).
-- **Stage 2 (Backtracking & Scoring):** Executes a Generalized Set Cover search. It doesn't force one candidate to have every skill. Instead, it ensures the *team as a whole* covers **at least one skill from every semantic group**.
-- **Optimization:** Teams are scored to reward *Multi-tasking* (fewer people, lower cost) and *Culture Fit* ("Team player" bonuses), while penalizing redundancy.
+### 3.3. Generalized Set Cover Algorithm
+Engine ghép đội hai giai đoạn:
+- **Giai đoạn 1 (Pre-processing):** Loại ứng viên không đáp ứng ràng buộc giao (thời gian, ngoại ngữ).
+- **Giai đoạn 2 (Backtracking & Scoring):** Tìm kiếm tổ hợp đội hình sao cho toàn đội bao phủ 100% kỹ năng yêu cầu, tối ưu hóa theo Multi-tasking bonus và Culture Fit score.
 
-### 4. 📊 Agentic Pipeline UI & Data Viz
-We don't just spit out results. AES simulates an **Agentic Workflow Terminal** right in the UI, showing the steps the AI takes to reason about the team. The final `ResultBoard` displays gorgeous **Progress Bars** detailing:
-- **Tech & Domain Coverage (100%)**
-- **Cost Efficiency / Budget Saved**
-- **Culture Fit Score**
+### 3.4. Agentic Pipeline UI & Data Visualization
+- Terminal mô phỏng pipeline AI (NLP Agent → Combinatorial Agent → Culture Fit Agent → Gemini AI Agent).
+- Dashboard hiển thị các Progress Bar: Tech Coverage, Cost Efficiency, Culture Fit Score.
+- Gemini LLM tổng hợp báo cáo giải thích lý do chọn đội hình.
 
-Finally, Gemini LLM synthesizes a professional business report explaining *why* this specific squad was chosen over others.
+### 3.5. Interactive PixelBlast Background
+Hiệu ứng nền WebGL (Three.js + Shader) với Bayer dithering và ripple waves khi click, tạo trải nghiệm thị giác sinh động.
 
-## 🛠 Tech Stack
-- **Framework:** Next.js 14 (App Router)
-- **Styling:** Tailwind CSS + Shadcn UI components
-- **AI/LLM:** Google Gemini API (via Next.js Route Handlers)
-- **Data:** 100% Client-side JSON Mock Data (40 Multi-variable Candidate Profiles)
-- **Design System:** Strictly adheres to Adyen Constraints (`#001222` Dark Canvas, `#00d16a` Mint Voltage, `6px` border radius, JetBrains Mono labels).
+## 4. Công nghệ và phụ thuộc
 
-## 📦 Getting Started
-1. Clone the repository.
-2. Navigate to `source/`: `cd source`
-3. Install dependencies: `npm install` (or `bun install`)
-4. Run the development server: `npm run dev`
-5. Open `http://localhost:3000` to access the Landing Page and Manager Portal.
+| Công nghệ | Mục đích |
+|---|---|
+| **Next.js 14** (App Router) | Framework fullstack (SSR + API Routes) |
+| **React 18** | UI component library |
+| **TypeScript** | Type safety |
+| **Tailwind CSS** | Utility-first styling |
+| **Shadcn UI** | Component primitives (Button, Card, Badge, Label, Input) |
+| **Framer Motion** | Animation & transitions |
+| **Google Gemini API** | NLP parsing & reasoning report generation |
+| **Three.js + Postprocessing** | WebGL background effects (PixelBlast) |
+| **Mock Data (JSON)** | 40 candidate profiles với multi-variable attributes |
 
-## 🏆 Definition of Done (Checklist Achieved)
-- [x] 40 Rich JSON Mock Profiles (Supermen & Specialists).
-- [x] Text-to-Team Natural Language UI.
-- [x] 100% Skill Coverage & Max Members Enforcement.
-- [x] Explicit Error Handling (Missing skills/size limits clearly displayed).
-- [x] Real-time State Invalidation.
-- [x] Fully responsive, professional Adyen UI.
+**Design System:** Tuân thủ Adyen Design Constraints — `#001222` Dark Canvas, `#00d16a` Mint Voltage, `6px` border radius, JetBrains Mono labels.
+
+## 5. Hướng dẫn cài đặt và chạy dự án
+
+### Yêu cầu
+- Node.js >= 18
+- npm hoặc bun
+
+### Các bước
+
+```bash
+# 1. Clone repository
+git clone https://github.com/thiendt1608/spd-challenge.git
+cd spd-challenge
+
+# 2. Di chuyển vào thư mục source
+cd source
+
+# 3. Cài đặt dependencies
+npm install
+
+# 4. Tạo file .env với Gemini API key (nếu muốn dùng AI features)
+echo "GEMINI_API_KEY=your_api_key_here" > .env
+
+# 5. Chạy development server
+npm run dev
+
+# 6. Mở trình duyệt
+# Landing Page:      http://localhost:3000
+# Manager Dashboard: http://localhost:3000/dashboard
+```
+
+### Build production
+
+```bash
+npm run build
+npm start
+```
+
+## 6. Cấu trúc thư mục
+
+```
+spd-challenge/
+├── README.md                          # File này
+├── submission.json                    # Metadata nộp bài
+├── PLAN.md                            # Kế hoạch thực hiện
+├── IMPLEMENTATION_GUIDE.md            # Hướng dẫn triển khai chi tiết
+├── chatlog.md                         # Lịch sử prompt & response
+├── SPD-Challenge-2026-Official-Problem.md  # Đề bài gốc
+│
+└── source/                            # Mã nguồn chính (Next.js project)
+    ├── package.json
+    ├── tailwind.config.ts             # Cấu hình Tailwind + Adyen design tokens
+    ├── next.config.mjs
+    ├── tsconfig.json
+    │
+    └── src/
+        ├── app/
+        │   ├── layout.tsx             # Root layout
+        │   ├── page.tsx               # Landing page (Marketing)
+        │   ├── globals.css            # Global styles + CSS variables
+        │   ├── dashboard/
+        │   │   ├── layout.tsx         # Dashboard layout (header + sticky nav)
+        │   │   └── page.tsx           # Manager Portal (Text-to-Team UI)
+        │   └── api/
+        │       ├── parse-prompt/
+        │       │   └── route.ts       # API: Gemini NLP parsing
+        │       └── generate-reasoning/
+        │           └── route.ts       # API: Gemini reasoning report
+        │
+        ├── components/
+        │   ├── SetupForm.tsx          # Form nhập prompt ngôn ngữ tự nhiên
+        │   ├── ResultBoard.tsx        # Bảng kết quả đội hình + metrics
+        │   ├── CandidateGrid.tsx      # Grid hiển thị pool ứng viên
+        │   ├── ErrorAlert.tsx         # Component thông báo lỗi
+        │   ├── adyen/                 # Components theo Adyen Design System
+        │   │   ├── SectionBand.tsx    # Layout section (dark/light variant)
+        │   │   ├── AdyenButton.tsx    # Button component
+        │   │   └── MonoEyebrow.tsx    # Label eyebrow (JetBrains Mono)
+        │   ├── layout/
+        │   │   └── TopNav.tsx         # Navigation bar (Landing page)
+        │   └── ui/                    # Shadcn UI primitives + effects
+        │       ├── PixelBlast.jsx     # WebGL background effect
+        │       ├── PixelBlast.css
+        │       ├── button.tsx
+        │       ├── card.tsx
+        │       ├── badge.tsx
+        │       ├── label.tsx
+        │       └── input.tsx
+        │
+        ├── hooks/
+        │   └── useTeamMatching.ts     # Core logic: parsing + matching + scoring
+        │
+        ├── data/
+        │   └── candidates.json        # 40 candidate profiles (mock data)
+        │
+        └── lib/
+            └── utils.ts               # Utility functions (cn helper)
+```
+
+## 7. Đội ngũ phát triển
+
+### Team syncx
+
+| Thành viên | Vai trò |
+|---|---|
+| **Nguyễn Quang Linh** | Frontend Developer & UI/UX — Thiết kế giao diện, xây dựng Design System theo chuẩn Adyen, triển khai Landing Page và Dashboard UI |
+| **Nguyễn Nho Chí Thiện** | Backend Developer & AI Engineer — Xây dựng thuật toán Set Cover, tích hợp Gemini API, thiết kế pipeline NLP parsing và matching engine |
