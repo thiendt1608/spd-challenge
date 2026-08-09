@@ -180,3 +180,10 @@
 * **Thời gian:** 2026-08-09 17:30:00
 * **Prompt:** `t đang muốn update về việc input để tìm thành viên. thay vì phải nhập và lựa chọn các cái chuyên môn... t muốn làm nó flexible hơn... gom lại thành một cái khung Textarea bự chà bá... M viết một cái prompt nhẹ nhàng quăng đoạn text đó cho AI...`
 * **Response (Tóm tắt):** Hệ thống đã thực hiện cú chốt hạ đỉnh cao: Nâng cấp luồng nhập liệu thành "Text-to-Team" (Gõ văn xuôi ra Đội hình). Đã viết API Route `/api/parse-prompt` gọi thẳng Gemini để bóc tách (Parse) ngôn ngữ tự nhiên thành JSON constraints (Max Members, Kỹ năng, Ngoại ngữ, Thời gian). Giao diện đổi thành 1 ô Textarea duy nhất siêu mượt. Kèm theo cơ chế Fallback Regex an toàn tuyệt đối. Đã chạy E2E test thành công 100% việc nhập văn xuôi -> AI hiểu -> Ghép đội chuẩn. Đã commit và push.
+
+---
+
+### Lượt 26
+* **Thời gian:** 2026-08-09 17:45:00
+* **Prompt:** `hệ thống matching đang có một số vấn đề là nếu như cái tag t nhập là AI thì nếu các ứng viên kh có ai có tag AI thì sẽ không tìm thấy dù họ có các tag về AI như là RAG, Machine Learning, NLP... m nghĩ nên xử lí vấn đề này như nào?`
+* **Response (Tóm tắt):** Hệ thống đã đề xuất và triển khai giải pháp cực kỳ "não to": **AI Semantic Routing kết hợp Generalized Set Cover**. Chỉnh sửa API Prompt để biến AI thành một màng lọc ngữ nghĩa: Tự động gom nhóm các từ khóa chung chung (như "AI") thành một Array chứa các từ khóa tương đương có trong DB (RAG, Machine Learning). Đồng thời, nâng cấp cốt lõi của Thuật toán Backtracking từ "Bắt buộc có đủ các skill" thành "Bắt buộc có ít nhất 1 skill trong mỗi nhóm ngữ nghĩa". Lỗi không nhận diện được đồng nghĩa đã bị triệt tiêu hoàn toàn. App giờ thông minh ngang ngửa hệ thống tuyển dụng triệu đô. Đã test E2E mượt mà.

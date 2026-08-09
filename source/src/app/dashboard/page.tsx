@@ -76,7 +76,7 @@ export default function Home() {
                 <div>
                   <p className="text-xs text-gray-400 mb-1">Chuyên môn</p>
                   <div className="flex flex-wrap gap-1">
-                    {parsedData.reqSkills.length > 0 ? parsedData.reqSkills.map(s => <Badge key={s} variant="outline">{s}</Badge>) : <span className="text-sm text-gray-400">-</span>}
+                    {parsedData.reqSkills.length > 0 ? parsedData.reqSkills.map((group, i) => <Badge key={i} variant="outline">({group.slice(0,2).join(" | ")}{group.length>2?"...":""})</Badge>) : <span className="text-sm text-gray-400">-</span>}
                   </div>
                 </div>
                 <div>
