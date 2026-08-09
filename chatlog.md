@@ -57,3 +57,10 @@
 * **Thời gian:** 2026-08-09 14:50:00
 * **Prompt:** `@adyen.design.md bạn add thêm constrains pj rồi bạn break nhỏ các bước implemnt hơn nữa nha đạt được đúng sự rõ ràng và clear lại lại - teckstack FE: Nextjs + tailwind + shadcn nha`
 * **Response (Tóm tắt):** AI đã đọc file thiết kế `adyen.design.md` và trích xuất các quy tắc UI cốt lõi (Dark canvas #001222, Mint voltage #00d16a, viền bo cứng 6px, font JetBrains Mono cho Eyebrow). Từ đó, AI lập ra file `IMPLEMENTATION_GUIDE.md` mới, chia nhỏ kế hoạch cũ thành các bước cực kỳ chi tiết (Granular) dựa trên stack Next.js, Tailwind, Shadcn. Đồng bộ lại hệ thống theo dõi task và thực hiện commit & push theo rule.
+
+---
+
+### Lượt 9
+* **Thời gian:** 2026-08-09 14:53:00
+* **Prompt:** `trong file AGENTS.md có nhắc gì tới các skill của agent không?`
+* **Response (Tóm tắt):** AI xác nhận trong file `AGENTS.md` có nhắc đến folder `skills/` ở phần "Key Directories", ghi chú rằng đây là nơi chứa các "agent capability guidelines" của hệ thống Oh My Pi và yêu cầu không chỉnh sửa thư mục này trong quá trình phát triển app. Sau đó, AI thực hiện ghi log và push code.
