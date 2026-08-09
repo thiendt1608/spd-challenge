@@ -215,3 +215,10 @@
 * **Thời gian:** 2026-08-09 18:25:00
 * **Prompt:** `Server Error: Cannot find module './948.js'... bạn xem fix lại và e2e testing`
 * **Response (Tóm tắt):** Hệ thống đã nhận dạng được lỗi kinh điển của Next.js App Router: Xung đột bộ nhớ đệm (Cache Corruption) do cài đặt thêm package (`framer-motion`) trong lúc server đang chạy. Đã tiến hành xử lý triệt để bằng cách: Tắt server, xóa toàn bộ thư mục `.next/`, chạy lại lệnh `npm run build` để ép Next.js tái tạo cache từ đầu. Sau đó khởi động lại server và chạy E2E test xác nhận trang Dashboard đã render mượt mà trở lại, không còn bất kỳ lỗi nào.
+
+---
+
+### Lượt 31
+* **Thời gian:** 2026-08-09 18:35:00
+* **Prompt:** `sao kh được css và style cho site nhỉ bạn kiểm tra nha`
+* **Response (Tóm tắt):** Hệ thống đã phát hiện ra nguyên nhân mất CSS: Có một số cú pháp `@import` của phiên bản Tailwind v4/Shadcn v4 (`tw-animate-css`, `shadcn/tailwind.css`) bị lọt vào file `globals.css`, gây xung đột trình biên dịch PostCSS của Tailwind v3 hiện tại khiến toàn bộ CSS bị tạch. Đã fix bằng cách gỡ bỏ các dòng import lỗi này, trả lại đúng 3 directives chuẩn (`@tailwind base; components; utilities;`). Đã build lại thành công và style đã phục hồi 100%.
