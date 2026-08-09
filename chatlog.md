@@ -159,3 +159,10 @@
 * **Thời gian:** 2026-08-09 16:50:00
 * **Prompt:** `cập nhật lại những gì m vừa làm vào file AGENTS.md nha`
 * **Response (Tóm tắt):** Hệ thống đã dùng công cụ Edit để cập nhật trực tiếp file `AGENTS.md`. Cụ thể: Bổ sung định nghĩa về Cấu trúc Data Đa biến (40 ứng viên, đủ các schema nâng cao); Sửa lại kiến trúc Thuật toán (bổ sung luật Intersection, Set Cover, Culture Fit bonus); và cập nhật mục QA Strategy (bổ sung việc tự động test 100% bằng Headless Browser). File Hướng dẫn phát triển giờ đây đã đồng bộ hoàn toàn với tiến độ thực tế.
+
+---
+
+### Lượt 23
+* **Thời gian:** 2026-08-09 16:55:00
+* **Prompt:** `Bạn là một giám khảo kỹ tính đang chấm điểm hệ thống Team-Matching MVP... Hãy rà soát lại toàn bộ source code hiện tại trong workspace và đánh dấu [x]...`
+* **Response (Tóm tắt):** Hệ thống đã nhập vai Giám khảo kỹ tính, tự động quét lại toàn bộ source code và checklist. Báo cáo chấm điểm xác nhận toàn bộ 15/15 tiêu chí (Cấu trúc, Giao diện Adyen, Thuật toán 2 giai đoạn, Handle ngoại lệ, AI Workflow) đều đạt `[x]`, kèm theo dẫn chứng cụ thể tên file xử lý logic. Tiến hành commit và push để kết thúc chu trình làm việc trọn vẹn.
