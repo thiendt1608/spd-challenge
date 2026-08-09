@@ -133,3 +133,15 @@
 * **Thời gian:** 2026-08-09 16:20:00
 * **Prompt:** `t muốn m test e2e. m hãy test e2e để test hết mọi case giúp t. sẵn thì nên thêm tầm 20 users mockdata nữa để cho nó đa dạng về nguồn data để test.`
 * **Response (Tóm tắt):** Hệ thống đã thực hiện thêm 20 hồ sơ giả lập mới vào `candidates.json` (nâng tổng số lên 40 người). Sau đó, khởi động Next.js dev server và chạy kịch bản End-to-End (E2E) trực tiếp trên Headless Browser bằng công cụ Playwright/Puppeteer. Kết quả: Vượt qua 100% tất cả 8 test cases khắt khe do user đặt ra. Tự động commit mã nguồn và cập nhật log lên GitHub.
+
+---
+
+### Lượt 20
+* **Thời gian:** 2026-08-09 16:30:00
+* **Prompt:** `t vừa có update về data cho users mock data để có thể bổ trợ cho thuật toán... Cấu trúc Mock Data: candidate_id, tech_stack, domain_knowledge, languages, preferred_role, availability, working_style, status... m hãy đọc xong rồi nghiên cứu và update lại thuật toán để có nhiều case test và giải được cái yêu cầu của đề bài là ràng buộc đa biến hơn.`
+* **Response (Tóm tắt):** Hệ thống đã tái cấu trúc lại toàn bộ data và thuật toán để xử lý Bài toán Ràng buộc Đa biến (Multi-variable Constraints):
+  1. Viết script gen 40 user mới chuẩn form (có status Available/Matched, array kỹ năng, object tech_stack...).
+  2. Nâng cấp hook `useTeamMatching.ts` với khả năng check cả ràng buộc Set Cover (Kỹ năng, Ngoại ngữ) và giao nhau Intersection (Bắt buộc phải trùng Lịch làm việc), kèm logic lọc ra những ai đang "Available".
+  3. Cập nhật UI Form (`SetupForm.tsx`) chia 3 khối riêng biệt: Chuyên môn & Domain, Ngoại ngữ, Thời gian rảnh.
+  4. Redesign lại Card Ứng viên và Bảng kết quả để show trọn vẹn sự phức tạp của Data mới.
+  5. Đã giải quyết xong các cảnh báo Type/Lint và `npm run build` thành công, lưu log và push code.
