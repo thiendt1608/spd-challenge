@@ -1,27 +1,58 @@
+import candidatesData from '@/data/candidates.json';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import candidatesData from "@/data/candidates.json";
+import { Candidate } from "@/hooks/useTeamMatching";
 
 export function CandidateGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-      {candidatesData.map((candidate) => (
-        <Card key={candidate.id} className="p-4 rounded-adyen border-adyen-surface-3/20 shadow-none bg-white">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-adyen bg-adyen-light flex items-center justify-center font-mono font-bold text-adyen-canvas">
-              {candidate.name.charAt(0)}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {(candidatesData as unknown as Candidate[]).map((candidate: Candidate) => {
+        const isMatched = candidate.status === "Matched";
+        return (
+          <Card key={candidate.candidate_id} className={`p-5 rounded-adyen shadow-sm border ${isMatched ? 'bg-gray-100 opacity-50 border-gray-200' : 'bg-white border-adyen-surface-3/10'}`}>
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <h4 className="font-semibold text-adyen-canvas truncate">{candidate.name}</h4>
+                <p className="text-xs text-adyen-ink-muted">{candidate.preferred_role}</p>
+              </div>
+              {isMatched && <Badge variant="secondary" className="text-[10px]">Đã ghép đội</Badge>}
             </div>
-            <h4 className="font-semibold text-adyen-canvas">{candidate.name}</h4>
-          </div>
-          <div className="flex flex-wrap gap-1">
-            {candidate.skills.map(skill => (
-              <Badge key={skill} variant="outline" className="rounded-adyen text-xs font-normal border-adyen-surface-3/30 text-adyen-ink-muted">
-                {skill}
-              </Badge>
-            ))}
-          </div>
-        </Card>
-      ))}
+            
+            <div className="space-y-3">
+              <div>
+                <p className="text-[10px] uppercase font-mono tracking-wider text-adyen-ink-muted mb-1">Tech Stack & Domain</p>
+                <div className="flex flex-wrap gap-1">
+                  {Object.keys(candidate.tech_stack).map(s => (
+                    <span key={s} className="bg-adyen-light text-adyen-ink-muted text-[10px] px-1.5 py-0.5 rounded-sm border border-gray-200">{s} ({candidate.tech_stack[s]})</span>
+                  ))}
+                  {candidate.domain_knowledge.map((d: string) => (
+                    <span key={d} className="bg-indigo-50 text-indigo-700 text-[10px] px-1.5 py-0.5 rounded-sm border border-indigo-100">{d}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <p className="text-[10px] uppercase font-mono tracking-wider text-adyen-ink-muted mb-1">Ngoại ngữ</p>
+                  <div className="flex flex-wrap gap-1">
+                    {candidate.languages.map((l: string) => (
+                      <span key={l} className="bg-green-50 text-green-700 text-[10px] px-1.5 py-0.5 rounded-sm border border-green-100">{l}</span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-mono tracking-wider text-adyen-ink-muted mb-1">Thời gian</p>
+                  <div className="flex flex-wrap gap-1">
+                    {candidate.availability.map((a: string) => (
+                      <span key={a} className="bg-orange-50 text-orange-700 text-[10px] px-1.5 py-0.5 rounded-sm border border-orange-100">{a}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        );
+      })}
     </div>
   );
 }

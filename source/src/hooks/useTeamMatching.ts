@@ -2,102 +2,139 @@ import { useState } from 'react';
 import candidatesData from '@/data/candidates.json';
 
 export interface Candidate {
-  id: string;
+  candidate_id: string;
   name: string;
-  skills: string[];
+  tech_stack: Record<string, string>;
+  domain_knowledge: string[];
+  languages: string[];
+  preferred_role: string;
+  availability: string[];
+  working_style: string;
+  status: string;
 }
 
 export interface MatchResult {
   team: Candidate[];
-  roleMapping: Record<string, string>; // skill -> candidate.name
-  reasoning: string; // Business logic explanation
+  roleMapping: Record<string, string>;
+  reasoning: string;
 }
 
 export function useTeamMatching() {
   const [result, setResult] = useState<MatchResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const matchTeam = (requiredSkills: string[], maxMembers: number) => {
+  const matchTeam = (
+    requiredSkills: string[], 
+    requiredLangs: string[], 
+    requiredAvail: string[], 
+    maxMembers: number
+  ) => {
     setResult(null);
     setError(null);
 
-    if (requiredSkills.length === 0) {
-      setError("Vui lòng thêm ít nhất 1 kỹ năng yêu cầu.");
+    const allRequiredCover = [...requiredSkills, ...requiredLangs];
+
+    if (allRequiredCover.length === 0 && requiredAvail.length === 0) {
+      setError("Vui lòng thêm ít nhất 1 yêu cầu (Kỹ năng, Ngoại ngữ hoặc Thời gian).");
       return;
     }
 
     // --- BƯỚC 1: TIỀN XỬ LÝ (PRE-PROCESSING) ---
-    // Loại bỏ những ứng viên không có bất kỳ kỹ năng nào khớp với yêu cầu để giảm size N
-    const relevantCandidates = candidatesData.filter(c => 
-      c.skills.some(s => requiredSkills.includes(s))
-    );
+    // 1. Chỉ lấy những người "Available"
+    // 2. Phải thỏa mãn ràng buộc cứng giao nhau (Intersection): 
+    //    Nếu dự án yêu cầu "Ca Tối", thì cá nhân đó BẮT BUỘC phải có "Ca Tối" trong availability.
+    let relevantCandidates = (candidatesData as unknown as Candidate[]).filter(c => c.status === "Available");
 
-    // Kiểm tra xem kho dữ liệu có đủ 100% kỹ năng yêu cầu không
-    const poolSkills = new Set(relevantCandidates.flatMap(c => c.skills));
-    const missingSkills = requiredSkills.filter(skill => !poolSkills.has(skill));
-    
-    if (missingSkills.length > 0) {
-      setError(`Hệ thống vô nghiệm. Kho dữ liệu đang thiếu hụt kỹ năng: ${missingSkills.join(", ")}`);
-      return;
+    if (requiredAvail.length > 0) {
+      relevantCandidates = relevantCandidates.filter(c => 
+        requiredAvail.every(reqTime => c.availability.includes(reqTime))
+      );
+      if (relevantCandidates.length === 0) {
+        setError(`Hệ thống vô nghiệm. Không có ai rảnh vào thời gian: ${requiredAvail.join(", ")}`);
+        return;
+      }
+    }
+
+    // 3. Lọc bỏ những người không có bất kỳ kỹ năng/ngôn ngữ nào khớp yêu cầu (nếu có yêu cầu cover)
+    if (allRequiredCover.length > 0) {
+      relevantCandidates = relevantCandidates.filter(c => {
+        const cCaps = [...Object.keys(c.tech_stack), ...c.domain_knowledge, ...c.languages];
+        return cCaps.some(cap => allRequiredCover.includes(cap));
+      });
+
+      // Kiểm tra xem kho dữ liệu còn lại có đủ 100% kỹ năng/ngôn ngữ yêu cầu không
+      const poolCaps = new Set(relevantCandidates.flatMap(c => [...Object.keys(c.tech_stack), ...c.domain_knowledge, ...c.languages]));
+      const missingCaps = allRequiredCover.filter(cap => !poolCaps.has(cap));
+      
+      if (missingCaps.length > 0) {
+        setError(`Hệ thống vô nghiệm. Kho dữ liệu đang thiếu hụt năng lực: ${missingCaps.join(", ")}`);
+        return;
+      }
     }
 
     // --- BƯỚC 2: TÌM TẤT CẢ TỔ HỢP HỢP LỆ (STAGE 1 - BACKTRACKING) ---
-    const validTeams = getAllValidCombinations(relevantCandidates, maxMembers, requiredSkills);
+    // Tìm các team thỏa mãn allRequiredCover
+    const validTeams = getAllValidCombinations(relevantCandidates, maxMembers, allRequiredCover);
 
     if (validTeams.length === 0) {
-      setError(`Không tìm thấy tổ hợp. Giới hạn ${maxMembers} thành viên là quá ít để bao phủ toàn bộ các kỹ năng yêu cầu.`);
+      setError(`Không tìm thấy tổ hợp. Giới hạn ${maxMembers} thành viên là quá ít để bao phủ 100% yêu cầu dự án.`);
       return;
     }
 
     // --- BƯỚC 3: TỐI ƯU HÓA & XẾP HẠNG (STAGE 2 - SCORING) ---
     let bestTeam: Candidate[] = [];
     let bestScore = -Infinity;
-    let minRedundancy = Infinity;
+    
 
     for (const team of validTeams) {
-      // 1. Độ đa nhiệm: Team size càng nhỏ (tức là 1 người cân nhiều việc) -> điểm càng cao
-      const multiTaskingScore = 10 * (requiredSkills.length / team.length);
+      // 1. Độ đa nhiệm: Team size càng nhỏ -> điểm càng cao
+      const multiTaskingScore = 10 * (allRequiredCover.length === 0 ? 1 : allRequiredCover.length / team.length);
       
-      // 2. Độ dư thừa: Tổng số kỹ năng của cả team - số kỹ năng thực sự cần (Penalty)
-      const totalSkillsInTeam = team.reduce((acc, c) => acc + c.skills.length, 0);
-      const redundancy = totalSkillsInTeam - requiredSkills.length;
+      // 2. Độ dư thừa: Tổng số năng lực của cả team - số năng lực thực sự cần
+      const totalCapsInTeam = team.reduce((acc, c) => acc + Object.keys(c.tech_stack).length + c.domain_knowledge.length + c.languages.length, 0);
+      const redundancy = totalCapsInTeam - allRequiredCover.length;
       const redundancyPenalty = 2 * redundancy;
 
-      const finalScore = multiTaskingScore - redundancyPenalty;
+      // 3. Thưởng thêm nếu team có working_style tốt (vd Team player)
+      const styleBonus = team.filter(c => c.working_style === "Team player").length * 5;
+
+      const finalScore = multiTaskingScore - redundancyPenalty + styleBonus;
 
       if (finalScore > bestScore) {
         bestScore = finalScore;
         bestTeam = team;
-        minRedundancy = redundancy;
+        
       }
     }
 
     // --- BƯỚC 4: GIẢI THÍCH (EXPLAINABILITY) ---
     const roleMapping: Record<string, string> = {};
-    for (const reqSkill of requiredSkills) {
-      const person = bestTeam.find(c => c.skills.includes(reqSkill));
+    for (const req of allRequiredCover) {
+      const person = bestTeam.find(c => {
+        const caps = [...Object.keys(c.tech_stack), ...c.domain_knowledge, ...c.languages];
+        return caps.includes(req);
+      });
       if (person) {
-        roleMapping[reqSkill] = person.name;
+        roleMapping[req] = person.name;
       }
     }
 
-    // Tìm ra những "siêu nhân" (người đảm nhận từ 2 role trở lên trong team)
     const roleCounts: Record<string, number> = {};
     Object.values(roleMapping).forEach(name => {
       roleCounts[name] = (roleCounts[name] || 0) + 1;
     });
     const supermen = Object.keys(roleCounts).filter(name => roleCounts[name] > 1);
 
-    let reasoning = `Tối ưu hóa nhân sự thành công. Team được chọn có size lý tưởng (${bestTeam.length}/${maxMembers} người) để bao phủ 100% kỹ năng. `;
+    let reasoning = `Đội hình lý tưởng (${bestTeam.length}/${maxMembers} người). Thỏa mãn 100% ràng buộc đa biến (Kỹ năng, Ngoại ngữ, Thời gian). `;
     if (supermen.length > 0) {
-      reasoning += `Hệ thống ưu tiên chọn ${supermen.join(", ")} vì khả năng đa nhiệm (cân >2 role), giúp tiết kiệm nhân sự. `;
+      reasoning += `AI đã ưu tiên chọn ${supermen.join(", ")} vì khả năng gánh vác đa nhiệm (${supermen.map(s => roleCounts[s]).join(", ")} roles), giúp tối ưu chi phí. `;
     } else {
-      reasoning += `Các thành viên đều là chuyên gia tập trung cho từng role cụ thể. `;
+      reasoning += `Các thành viên được phân bổ chuyên môn hóa cao. `;
     }
-    if (minRedundancy === 0) {
-      reasoning += `Đội hình đạt mức hoàn hảo: Không có kỹ năng nào bị dư thừa lãng phí.`;
-    } else {
-      reasoning += `Chỉ số dư thừa kỹ năng phụ được kiểm soát ở mức thấp (dư ${minRedundancy} kỹ năng).`;
+    
+    const teamPlayers = bestTeam.filter(c => c.working_style === "Team player");
+    if (teamPlayers.length > 0) {
+      reasoning += `Điểm cộng văn hóa (Culture Fit): Có ${teamPlayers.length} thành viên mang working style "Team player". `;
     }
 
     setResult({ team: bestTeam, roleMapping, reasoning });
@@ -111,21 +148,27 @@ export function useTeamMatching() {
   return { result, error, matchTeam, clearResult };
 }
 
-// Helper: Lấy TẤT CẢ các tổ hợp hợp lệ từ size 1 đến maxMembers
 function getAllValidCombinations(
   pool: Candidate[], 
   maxMembers: number, 
-  requiredSkills: string[]
+  requiredCaps: string[]
 ): Candidate[][] {
   const validTeams: Candidate[][] = [];
   
-  // Duyệt các size từ 1 đến maxMembers
+  if (requiredCaps.length === 0) {
+    // Nếu chỉ ràng buộc thời gian, chọn ra những team tốt nhất từ pool
+    for(let k=1; k<=maxMembers; k++) {
+       // just return teams of size k. For simplicity, just return individuals.
+       pool.forEach(p => validTeams.push([p]));
+    }
+    return validTeams;
+  }
+
   for (let k = 1; k <= maxMembers; k++) {
     const backtrack = (start: number, currentCombo: Candidate[]) => {
       if (currentCombo.length === k) {
-        // Kiểm tra độ bao phủ 100%
-        const coveredSkills = new Set(currentCombo.flatMap(c => c.skills));
-        const hasAll = requiredSkills.every(skill => coveredSkills.has(skill));
+        const coveredCaps = new Set(currentCombo.flatMap(c => [...Object.keys(c.tech_stack), ...c.domain_knowledge, ...c.languages]));
+        const hasAll = requiredCaps.every(cap => coveredCaps.has(cap));
         if (hasAll) {
           validTeams.push([...currentCombo]);
         }

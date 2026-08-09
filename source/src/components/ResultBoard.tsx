@@ -13,23 +13,37 @@ export function ResultBoard({ result }: { result: MatchResult }) {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {result.team.map((member) => {
-          // Find which required skills this member is fulfilling
           const assignedRoles = Object.entries(result.roleMapping)
             .filter(([, name]) => name === member.name)
-            .map(([skill]) => skill);
+            .map(([cap]) => cap);
 
           return (
-            <Card key={member.id} className="p-5 rounded-adyen shadow-none border-2 border-adyen-mint bg-adyen-light">
-              <h4 className="font-semibold text-adyen-canvas mb-1">{member.name}</h4>
-              <p className="text-sm font-medium text-adyen-ink-muted mb-3">Vai trò đảm nhận:</p>
-              <div className="flex flex-wrap gap-2">
-                {assignedRoles.map(role => (
+            <Card key={member.candidate_id} className="p-5 rounded-adyen shadow-none border-2 border-adyen-mint bg-adyen-light">
+              <div className="mb-3 border-b border-gray-200 pb-3">
+                <h4 className="font-semibold text-adyen-canvas">{member.name}</h4>
+                <p className="text-xs font-mono text-adyen-ink-muted">{member.preferred_role} • {member.working_style}</p>
+              </div>
+              
+              <p className="text-sm font-medium text-adyen-ink-muted mb-2">Đảm nhận yêu cầu (Vai trò):</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {assignedRoles.length > 0 ? assignedRoles.map(role => (
                   <span key={role} className="bg-adyen-mint text-adyen-canvas text-xs font-medium px-2 py-1 rounded-sm">
                     {role}
                   </span>
-                ))}
+                )) : <span className="text-xs text-gray-500 italic">Hỗ trợ chung dự án</span>}
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 text-[10px]">
+                <div className="bg-white p-2 rounded border border-gray-200">
+                  <span className="block text-gray-400 font-mono mb-1">THỜI GIAN</span>
+                  <span className="font-medium text-gray-700">{member.availability.join(", ")}</span>
+                </div>
+                <div className="bg-white p-2 rounded border border-gray-200">
+                  <span className="block text-gray-400 font-mono mb-1">NGOẠI NGỮ</span>
+                  <span className="font-medium text-gray-700">{member.languages.join(", ")}</span>
+                </div>
               </div>
             </Card>
           );

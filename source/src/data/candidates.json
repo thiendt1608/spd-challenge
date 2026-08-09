@@ -1,341 +1,868 @@
 [
   {
-    "id": "1",
-    "name": "Nguyễn Văn Alpha",
-    "skills": [
-      "Frontend",
-      "Backend",
-      "UI/UX",
-      "DevOps",
-      "Database"
-    ]
+    "candidate_id": "CAND-001",
+    "name": "Nguyễn Văn Siêu Nhân",
+    "tech_stack": {
+      "Python": "Expert",
+      "TypeScript": "Senior",
+      "React": "Senior",
+      "Go": "Mid",
+      "Docker": "Mid"
+    },
+    "domain_knowledge": [
+      "Agentic AI",
+      "RAG",
+      "SaaS"
+    ],
+    "languages": [
+      "Tiếng Anh",
+      "Tiếng Nhật N2"
+    ],
+    "preferred_role": "Fullstack",
+    "availability": [
+      "Ca Sáng",
+      "Ca Chiều",
+      "Ca Tối",
+      "Cuối tuần",
+      "Full-time"
+    ],
+    "working_style": "Team player",
+    "status": "Available"
   },
   {
-    "id": "2",
-    "name": "Trần Thị Beta",
-    "skills": [
-      "Data Science",
-      "Machine Learning",
-      "Python",
-      "Cloud Architecture"
-    ]
+    "candidate_id": "CAND-002",
+    "name": "Trần Thị Data",
+    "tech_stack": {
+      "Python": "Expert",
+      "SQL": "Senior",
+      "AWS": "Mid"
+    },
+    "domain_knowledge": [
+      "Fintech",
+      "E-commerce",
+      "Agentic AI"
+    ],
+    "languages": [
+      "Tiếng Anh",
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Data Engineer",
+    "availability": [
+      "Ca Sáng",
+      "Ca Tối"
+    ],
+    "working_style": "Làm độc lập",
+    "status": "Available"
   },
   {
-    "id": "3",
-    "name": "Lê Văn Gamma",
-    "skills": [
-      "Project Manager",
-      "Scrum Master",
-      "Business Analyst",
-      "QA"
-    ]
-  },
-  {
-    "id": "4",
-    "name": "Phạm Thị Delta",
-    "skills": [
-      "Frontend",
-      "React"
-    ]
-  },
-  {
-    "id": "5",
-    "name": "Hoàng Văn E",
-    "skills": [
-      "Backend",
-      "Nodejs"
-    ]
-  },
-  {
-    "id": "6",
-    "name": "Đặng Thị F",
-    "skills": [
-      "QA"
-    ]
-  },
-  {
-    "id": "7",
-    "name": "Bùi Văn G",
-    "skills": [
-      "UI/UX",
-      "Figma"
-    ]
-  },
-  {
-    "id": "8",
-    "name": "Đỗ Thị H",
-    "skills": [
-      "DevOps",
-      "Docker"
-    ]
-  },
-  {
-    "id": "9",
-    "name": "Ngô Văn I",
-    "skills": [
-      "Database",
-      "SQL"
-    ]
-  },
-  {
-    "id": "10",
-    "name": "Dương Thị K",
-    "skills": [
-      "Mobile",
-      "iOS"
-    ]
-  },
-  {
-    "id": "11",
-    "name": "Lý Văn L",
-    "skills": [
-      "Mobile",
-      "Android"
-    ]
-  },
-  {
-    "id": "12",
-    "name": "Đào Thị M",
-    "skills": [
-      "Backend",
-      "Go"
-    ]
-  },
-  {
-    "id": "13",
-    "name": "Vũ Văn N",
-    "skills": [
-      "Frontend",
-      "Vue"
-    ]
-  },
-  {
-    "id": "14",
-    "name": "Trịnh Thị O",
-    "skills": [
-      "Business Analyst"
-    ]
-  },
-  {
-    "id": "15",
-    "name": "Đinh Văn P",
-    "skills": [
-      "Scrum Master"
-    ]
-  },
-  {
-    "id": "16",
-    "name": "Phan Thị Q",
-    "skills": [
-      "Machine Learning"
-    ]
-  },
-  {
-    "id": "17",
-    "name": "Võ Văn R",
-    "skills": [
-      "Cloud Architecture",
-      "AWS"
-    ]
-  },
-  {
-    "id": "18",
-    "name": "Lâm Thị S",
-    "skills": [
-      "Data Science"
-    ]
-  },
-  {
-    "id": "19",
-    "name": "Phùng Văn T",
-    "skills": [
-      "Security",
-      "Penetration Testing"
-    ]
-  },
-  {
-    "id": "20",
-    "name": "Mai Thị U",
-    "skills": [
-      "Graphic Design"
-    ]
-  },
-  {
-    "id": "21",
-    "name": "Cao Văn V",
-    "skills": [
-      "Frontend",
-      "Svelte",
-      "Tailwind"
-    ]
-  },
-  {
-    "id": "22",
-    "name": "Bạch Thị X",
-    "skills": [
-      "Backend",
-      "Rust",
-      "WebAssembly"
-    ]
-  },
-  {
-    "id": "23",
-    "name": "Tạ Văn Y",
-    "skills": [
-      "Nữ"
-    ]
-  },
-  {
-    "id": "24",
-    "name": "Trương Thị Z",
-    "skills": [
-      "Marketing",
-      "Content Creator",
-      "SEO"
-    ]
-  },
-  {
-    "id": "25",
-    "name": "Lương Văn A2",
-    "skills": [
-      "Data Engineer",
-      "Kafka",
-      "Spark"
-    ]
-  },
-  {
-    "id": "26",
-    "name": "Hồ Thị B2",
-    "skills": [
-      "Game Developer",
-      "Unity",
-      "C#"
-    ]
-  },
-  {
-    "id": "27",
-    "name": "Châu Văn C2",
-    "skills": [
-      "Mobile",
-      "Flutter",
-      "Dart"
-    ]
-  },
-  {
-    "id": "28",
-    "name": "Hà Thị D2",
-    "skills": [
-      "DevOps",
-      "Kubernetes",
-      "Terraform",
-      "Nữ"
-    ]
-  },
-  {
-    "id": "29",
-    "name": "Thái Văn E2",
-    "skills": [
-      "Database",
-      "MongoDB",
-      "Redis"
-    ]
-  },
-  {
-    "id": "30",
-    "name": "Vương Thị F2",
-    "skills": [
-      "QA",
-      "Cypress",
-      "Selenium",
-      "Nữ"
-    ]
-  },
-  {
-    "id": "31",
-    "name": "Kiều Văn G2",
-    "skills": [
-      "System Admin",
-      "Linux",
-      "Networking"
-    ]
-  },
-  {
-    "id": "32",
-    "name": "Đoàn Thị H2",
-    "skills": [
-      "HR",
-      "Recruitment"
-    ]
-  },
-  {
-    "id": "33",
-    "name": "Trần Văn I2",
-    "skills": [
-      "Frontend",
-      "Angular",
-      "RxJS"
-    ]
-  },
-  {
-    "id": "34",
-    "name": "Phạm Thị K2",
-    "skills": [
-      "Backend",
-      "Python",
-      "Django",
-      "Nữ"
-    ]
-  },
-  {
-    "id": "35",
-    "name": "Lê Văn L2",
-    "skills": [
-      "UI/UX",
-      "Adobe XD",
-      "Prototyping"
-    ]
-  },
-  {
-    "id": "36",
-    "name": "Vũ Thị M2",
-    "skills": [
+    "candidate_id": "CAND-003",
+    "name": "Lê Hữu Coder",
+    "tech_stack": {
+      "Go": "Senior",
+      "Rust": "Senior",
+      "Kubernetes": "Mid",
+      "MongoDB": "Senior"
+    },
+    "domain_knowledge": [
       "Blockchain",
-      "Solidity",
-      "Smart Contract"
-    ]
+      "IoT System"
+    ],
+    "languages": [
+      "Tiếng Anh"
+    ],
+    "preferred_role": "Backend",
+    "availability": [
+      "Ca Tối",
+      "Cuối tuần"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
   },
   {
-    "id": "37",
-    "name": "Đỗ Văn N2",
-    "skills": [
-      "Cyber Security",
-      "Ethical Hacking"
-    ]
+    "candidate_id": "CAND-004",
+    "name": "Huỳnh Thanh Dũng",
+    "tech_stack": {
+      "Spring Boot": "Mid",
+      "Go": "Expert"
+    },
+    "domain_knowledge": [
+      "EdTech"
+    ],
+    "languages": [
+      "Tiếng Nhật N2",
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "QA",
+    "availability": [
+      "Ca Tối"
+    ],
+    "working_style": "Thích research",
+    "status": "Available"
   },
   {
-    "id": "38",
-    "name": "Bùi Thị O2",
-    "skills": [
-      "Agile Coach",
-      "Jira",
-      "Nữ"
-    ]
+    "candidate_id": "CAND-005",
+    "name": "Dương Minh Vinh",
+    "tech_stack": {
+      "Python": "Junior"
+    },
+    "domain_knowledge": [
+      "Healthcare",
+      "E-commerce"
+    ],
+    "languages": [
+      "Tiếng Hàn TOPIK 3",
+      "Tiếng Anh"
+    ],
+    "preferred_role": "Backend",
+    "availability": [
+      "Full-time",
+      "Cuối tuần",
+      "Ca Tối"
+    ],
+    "working_style": "Làm độc lập",
+    "status": "Available"
   },
   {
-    "id": "39",
-    "name": "Nguyễn Văn P2",
-    "skills": [
-      "Data Analyst",
-      "Tableau",
-      "PowerBI"
-    ]
+    "candidate_id": "CAND-006",
+    "name": "Phạm Minh Quân",
+    "tech_stack": {
+      "Kubernetes": "Junior"
+    },
+    "domain_knowledge": [
+      "Blockchain"
+    ],
+    "languages": [
+      "Tiếng Anh"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Sáng",
+      "Cuối tuần",
+      "Full-time"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
   },
   {
-    "id": "40",
-    "name": "Ngô Thị Q2",
-    "skills": [
-      "Sales",
-      "B2B"
-    ]
+    "candidate_id": "CAND-007",
+    "name": "Huỳnh Ngọc Quân",
+    "tech_stack": {
+      "Kubernetes": "Senior"
+    },
+    "domain_knowledge": [
+      "E-commerce",
+      "RAG"
+    ],
+    "languages": [
+      "Tiếng Hàn TOPIK 3",
+      "Tiếng Nhật N5"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Cuối tuần",
+      "Full-time"
+    ],
+    "working_style": "Làm độc lập",
+    "status": "Matched"
+  },
+  {
+    "candidate_id": "CAND-008",
+    "name": "Bùi Thanh Phát",
+    "tech_stack": {
+      "C++": "Senior",
+      "Spring Boot": "Senior"
+    },
+    "domain_knowledge": [
+      "RAG",
+      "Healthcare"
+    ],
+    "languages": [
+      "Tiếng Nhật N5",
+      "Tiếng Nhật N2"
+    ],
+    "preferred_role": "UI/UX",
+    "availability": [
+      "Ca Sáng",
+      "Ca Chiều",
+      "Ca Tối"
+    ],
+    "working_style": "Làm độc lập",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-009",
+    "name": "Ngô Ngọc Zeta",
+    "tech_stack": {
+      "Nodejs": "Senior"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Cuối tuần",
+      "Ca Sáng",
+      "Ca Tối"
+    ],
+    "working_style": "Team player",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-010",
+    "name": "Ngô Văn Giang",
+    "tech_stack": {
+      "C++": "Mid"
+    },
+    "domain_knowledge": [
+      "E-commerce"
+    ],
+    "languages": [
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Backend",
+    "availability": [
+      "Ca Chiều",
+      "Ca Sáng",
+      "Cuối tuần"
+    ],
+    "working_style": "Team player",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-011",
+    "name": "Hồ Văn Châu",
+    "tech_stack": {
+      "SQL": "Junior"
+    },
+    "domain_knowledge": [
+      "Agentic AI"
+    ],
+    "languages": [
+      "Tiếng Anh"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Chiều",
+      "Cuối tuần",
+      "Ca Sáng"
+    ],
+    "working_style": "Làm độc lập",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-012",
+    "name": "Hoàng Minh Delta",
+    "tech_stack": {
+      "Spring Boot": "Senior",
+      "SQL": "Expert"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Hàn TOPIK 3"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Chiều",
+      "Ca Tối",
+      "Full-time"
+    ],
+    "working_style": "Team player",
+    "status": "Matched"
+  },
+  {
+    "candidate_id": "CAND-013",
+    "name": "Ngô Thị Dũng",
+    "tech_stack": {
+      "MongoDB": "Senior",
+      "Python": "Senior",
+      "Docker": "Junior"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Anh"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Chiều",
+      "Cuối tuần",
+      "Full-time"
+    ],
+    "working_style": "Làm độc lập",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-014",
+    "name": "Phan Minh Đạt",
+    "tech_stack": {
+      "Spring Boot": "Mid",
+      "Docker": "Junior",
+      "Nodejs": "Junior"
+    },
+    "domain_knowledge": [
+      "Agentic AI",
+      "GameFi"
+    ],
+    "languages": [
+      "Tiếng Anh"
+    ],
+    "preferred_role": "QA",
+    "availability": [
+      "Full-time"
+    ],
+    "working_style": "Team player",
+    "status": "Matched"
+  },
+  {
+    "candidate_id": "CAND-015",
+    "name": "Lê Hữu Khoa",
+    "tech_stack": {
+      "C++": "Junior",
+      "Python": "Mid",
+      "Docker": "Expert"
+    },
+    "domain_knowledge": [
+      "GameFi",
+      "E-commerce"
+    ],
+    "languages": [
+      "Tiếng Nhật N2",
+      "Tiếng Anh"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Sáng",
+      "Cuối tuần"
+    ],
+    "working_style": "Thích research",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-016",
+    "name": "Lê Tuấn Châu",
+    "tech_stack": {
+      "Python": "Expert"
+    },
+    "domain_knowledge": [
+      "Agentic AI"
+    ],
+    "languages": [
+      "Tiếng Nhật N2",
+      "Tiếng Hàn TOPIK 3"
+    ],
+    "preferred_role": "QA",
+    "availability": [
+      "Ca Tối",
+      "Ca Chiều",
+      "Ca Sáng"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-017",
+    "name": "Đỗ Tuấn Khoa",
+    "tech_stack": {
+      "SQL": "Junior"
+    },
+    "domain_knowledge": [
+      "Agentic AI"
+    ],
+    "languages": [
+      "Tiếng Trung HSK4",
+      "Tiếng Hàn TOPIK 3"
+    ],
+    "preferred_role": "UI/UX",
+    "availability": [
+      "Ca Tối"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-018",
+    "name": "Lê Đức Alpha",
+    "tech_stack": {
+      "Python": "Expert",
+      "C++": "Expert",
+      "MongoDB": "Mid"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Nhật N2"
+    ],
+    "preferred_role": "Fullstack",
+    "availability": [
+      "Ca Chiều"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-019",
+    "name": "Hồ Minh Châu",
+    "tech_stack": {
+      "Docker": "Mid",
+      "Java": "Senior",
+      "Nodejs": "Mid"
+    },
+    "domain_knowledge": [
+      "Blockchain",
+      "Fintech"
+    ],
+    "languages": [
+      "Tiếng Anh",
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Frontend",
+    "availability": [
+      "Ca Tối",
+      "Ca Chiều",
+      "Ca Sáng"
+    ],
+    "working_style": "Làm độc lập",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-020",
+    "name": "Phan Văn Châu",
+    "tech_stack": {
+      "SQL": "Senior",
+      "React": "Mid"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Anh"
+    ],
+    "preferred_role": "DevOps",
+    "availability": [
+      "Ca Tối",
+      "Cuối tuần"
+    ],
+    "working_style": "Team player",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-021",
+    "name": "Dương Hữu Phương",
+    "tech_stack": {
+      "React": "Expert"
+    },
+    "domain_knowledge": [
+      "EdTech"
+    ],
+    "languages": [
+      "Tiếng Anh",
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Data Engineer",
+    "availability": [
+      "Ca Chiều",
+      "Cuối tuần",
+      "Ca Tối"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-022",
+    "name": "Bùi Hữu Yến",
+    "tech_stack": {
+      "Kubernetes": "Senior",
+      "Rust": "Senior"
+    },
+    "domain_knowledge": [
+      "RAG"
+    ],
+    "languages": [
+      "Tiếng Hàn TOPIK 3"
+    ],
+    "preferred_role": "Fullstack",
+    "availability": [
+      "Ca Tối"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-023",
+    "name": "Huỳnh Thanh Phương",
+    "tech_stack": {
+      "Spring Boot": "Junior",
+      "Kubernetes": "Senior"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Trung HSK4",
+      "Tiếng Hàn TOPIK 3"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Tối",
+      "Cuối tuần",
+      "Ca Sáng"
+    ],
+    "working_style": "Team player",
+    "status": "Matched"
+  },
+  {
+    "candidate_id": "CAND-024",
+    "name": "Hoàng Thị Quân",
+    "tech_stack": {
+      "Python": "Expert",
+      "Kubernetes": "Senior",
+      "SQL": "Expert"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Anh"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Tối",
+      "Cuối tuần"
+    ],
+    "working_style": "Chạy nước rút",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-025",
+    "name": "Đỗ Đức Nghĩa",
+    "tech_stack": {
+      "Python": "Junior"
+    },
+    "domain_knowledge": [
+      "Agentic AI"
+    ],
+    "languages": [
+      "Tiếng Hàn TOPIK 3"
+    ],
+    "preferred_role": "Frontend",
+    "availability": [
+      "Ca Chiều"
+    ],
+    "working_style": "Chạy nước rút",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-026",
+    "name": "Phạm Thị Sigma",
+    "tech_stack": {
+      "Rust": "Mid"
+    },
+    "domain_knowledge": [
+      "Fintech",
+      "SaaS"
+    ],
+    "languages": [
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Frontend",
+    "availability": [
+      "Cuối tuần",
+      "Ca Sáng",
+      "Full-time"
+    ],
+    "working_style": "Cẩn thận tỉ mỉ",
+    "status": "Matched"
+  },
+  {
+    "candidate_id": "CAND-027",
+    "name": "Huỳnh Minh Phi",
+    "tech_stack": {
+      "Docker": "Mid"
+    },
+    "domain_knowledge": [
+      "E-commerce",
+      "Agentic AI"
+    ],
+    "languages": [
+      "Tiếng Nhật N2",
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Data Engineer",
+    "availability": [
+      "Ca Tối",
+      "Cuối tuần"
+    ],
+    "working_style": "Chạy nước rút",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-028",
+    "name": "Hồ Hữu Omega",
+    "tech_stack": {
+      "React": "Junior",
+      "TypeScript": "Senior"
+    },
+    "domain_knowledge": [
+      "Blockchain"
+    ],
+    "languages": [
+      "Tiếng Nhật N5"
+    ],
+    "preferred_role": "Frontend",
+    "availability": [
+      "Ca Chiều"
+    ],
+    "working_style": "Chạy nước rút",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-029",
+    "name": "Lý Thanh Linh",
+    "tech_stack": {
+      "React": "Expert",
+      "C++": "Junior",
+      "TypeScript": "Junior"
+    },
+    "domain_knowledge": [
+      "Agentic AI"
+    ],
+    "languages": [
+      "Tiếng Nhật N2"
+    ],
+    "preferred_role": "Backend",
+    "availability": [
+      "Full-time",
+      "Ca Chiều"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-030",
+    "name": "Hoàng Minh Linh",
+    "tech_stack": {
+      "Python": "Senior"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Trung HSK4",
+      "Tiếng Nhật N5"
+    ],
+    "preferred_role": "Frontend",
+    "availability": [
+      "Ca Chiều",
+      "Cuối tuần"
+    ],
+    "working_style": "Thích cày đêm",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-031",
+    "name": "Lê Minh Yến",
+    "tech_stack": {
+      "Rust": "Mid",
+      "AWS": "Junior"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Nhật N5"
+    ],
+    "preferred_role": "Frontend",
+    "availability": [
+      "Ca Tối",
+      "Full-time"
+    ],
+    "working_style": "Cẩn thận tỉ mỉ",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-032",
+    "name": "Nguyễn Minh Phương",
+    "tech_stack": {
+      "TypeScript": "Expert"
+    },
+    "domain_knowledge": [
+      "RAG"
+    ],
+    "languages": [
+      "Tiếng Nhật N5"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Full-time",
+      "Ca Tối",
+      "Ca Chiều"
+    ],
+    "working_style": "Thích research",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-033",
+    "name": "Lý Hữu Sigma",
+    "tech_stack": {
+      "AWS": "Junior",
+      "Python": "Expert"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Nhật N5"
+    ],
+    "preferred_role": "QA",
+    "availability": [
+      "Ca Tối",
+      "Ca Sáng",
+      "Full-time"
+    ],
+    "working_style": "Làm độc lập",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-034",
+    "name": "Phạm Ngọc Châu",
+    "tech_stack": {
+      "SQL": "Mid",
+      "C++": "Junior",
+      "Java": "Junior"
+    },
+    "domain_knowledge": [
+      "Blockchain",
+      "EdTech"
+    ],
+    "languages": [
+      "Tiếng Nhật N2",
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Sáng",
+      "Ca Chiều"
+    ],
+    "working_style": "Cẩn thận tỉ mỉ",
+    "status": "Matched"
+  },
+  {
+    "candidate_id": "CAND-035",
+    "name": "Bùi Hải Linh",
+    "tech_stack": {
+      "Figma": "Senior",
+      "Python": "Senior"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Hàn TOPIK 3"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Cuối tuần"
+    ],
+    "working_style": "Cẩn thận tỉ mỉ",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-036",
+    "name": "Phan Đức Nghĩa",
+    "tech_stack": {
+      "Docker": "Expert"
+    },
+    "domain_knowledge": [
+      "Fintech",
+      "E-commerce"
+    ],
+    "languages": [
+      "Tiếng Nhật N2",
+      "Tiếng Anh"
+    ],
+    "preferred_role": "Leader",
+    "availability": [
+      "Cuối tuần",
+      "Ca Chiều",
+      "Full-time"
+    ],
+    "working_style": "Chạy nước rút",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-037",
+    "name": "Vũ Thu Phi",
+    "tech_stack": {
+      "Java": "Senior",
+      "C++": "Junior"
+    },
+    "domain_knowledge": [
+      "Agentic AI",
+      "Blockchain"
+    ],
+    "languages": [
+      "Tiếng Nhật N2",
+      "Tiếng Nhật N5"
+    ],
+    "preferred_role": "Frontend",
+    "availability": [
+      "Ca Chiều",
+      "Cuối tuần",
+      "Ca Sáng"
+    ],
+    "working_style": "Chạy nước rút",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-038",
+    "name": "Huỳnh Hải Phi",
+    "tech_stack": {
+      "AWS": "Mid"
+    },
+    "domain_knowledge": [
+      "SaaS",
+      "Healthcare"
+    ],
+    "languages": [
+      "Tiếng Trung HSK4"
+    ],
+    "preferred_role": "Scrum Master",
+    "availability": [
+      "Ca Sáng",
+      "Ca Chiều",
+      "Cuối tuần"
+    ],
+    "working_style": "Thích research",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-039",
+    "name": "Đỗ Hải Trang",
+    "tech_stack": {
+      "MongoDB": "Senior",
+      "Java": "Junior",
+      "Python": "Expert"
+    },
+    "domain_knowledge": [
+      "Healthcare",
+      "E-commerce"
+    ],
+    "languages": [
+      "Tiếng Anh",
+      "Tiếng Nhật N2"
+    ],
+    "preferred_role": "DevOps",
+    "availability": [
+      "Cuối tuần",
+      "Ca Chiều"
+    ],
+    "working_style": "Cẩn thận tỉ mỉ",
+    "status": "Available"
+  },
+  {
+    "candidate_id": "CAND-040",
+    "name": "Bùi Tuấn Yến",
+    "tech_stack": {
+      "Java": "Expert",
+      "AWS": "Expert"
+    },
+    "domain_knowledge": [],
+    "languages": [
+      "Tiếng Hàn TOPIK 3",
+      "Tiếng Anh"
+    ],
+    "preferred_role": "QA",
+    "availability": [
+      "Ca Sáng",
+      "Ca Tối",
+      "Full-time"
+    ],
+    "working_style": "Thích research",
+    "status": "Available"
   }
 ]
