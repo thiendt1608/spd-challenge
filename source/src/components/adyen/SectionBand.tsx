@@ -25,7 +25,7 @@ export function SectionBand({ variant = "light", className, children, ...props }
     >
       {isDark && (
         <PixelBlast 
-          className="absolute inset-0 z-0 pointer-events-auto"
+          className="absolute inset-0 z-[10] pointer-events-auto"
           color="#27852b" 
           variant="circle"
           pixelSize={6}
@@ -41,7 +41,7 @@ export function SectionBand({ variant = "light", className, children, ...props }
           transparent
         />
       )}
-      <div className="max-w-[1280px] mx-auto px-6 grid-cols-12 gap-6 relative z-10 pointer-events-none">
+      <div className="max-w-[1280px] mx-auto px-6 grid-cols-12 gap-6 relative z-[100] pointer-events-none">
         <div className="pointer-events-auto">
           {children}
         </div>

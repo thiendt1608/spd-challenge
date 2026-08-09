@@ -250,3 +250,10 @@
 * **Thời gian:** 2026-08-09 19:15:00
 * **Prompt:** `bạn xem cái background hiện tại trong layout thành các phần này lớp layer ở dưới nha đúng màu như đang hiện tại tôi #27852b đây là màu chính nha bạn xem thay thế vào thế cho nó sinh động`
 * **Response (Tóm tắt):** Hệ thống đã thực hiện tích hợp component đồ họa mới `<PixelBlast />` theo yêu cầu của user để làm background sinh động hơn. Cụ thể: Đã cài đặt thư viện `postprocessing` và `three`, tạo file component `PixelBlast`, và gắn nó vào `SectionBand.tsx` (Dark variant). Hiệu ứng Pixel Blast được gán mã màu `#27852b` như yêu cầu, nằm an toàn ở layer `z-0` (không làm vỡ khung content `z-10`), và hỗ trợ tương tác click tạo sóng nước (ripple waves) cực kỳ bắt mắt. Đã build thành công không lỗi lầm.
+
+---
+
+### Lượt 36
+* **Thời gian:** 2026-08-09 19:25:00
+* **Prompt:** `ý của tôi là cái div content tôi vừa gửi là layer nằm ở phía trên cái bg. còn background nằm ở phía dưới, Như cái div content là Z-100 còn bg: z-10 và bạn cho nó đúng nhé kh phải nằm ở trên và ở dưới á bạn đang bị nhầm`
+* **Response (Tóm tắt):** Hệ thống đã tiếp nhận feedback và sửa lại chính xác các giá trị z-index theo đúng logic mường tượng của user để dễ dàng maintain. Cụ thể: Sửa cứng thẻ `<PixelBlast>` thành `z-[10]`, và sửa thẻ `div` bọc content thành `z-[100]`. Đảm bảo hệ thống CSS Stacking Context hoạt động rõ ràng, layer content luôn đè lên layer background một khoảng z-index đủ lớn và an toàn tuyệt đối.
