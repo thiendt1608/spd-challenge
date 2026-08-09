@@ -7,8 +7,9 @@ import { SetupForm } from "@/components/SetupForm";
 import { CandidateGrid } from "@/components/CandidateGrid";
 import { ResultBoard } from "@/components/ResultBoard";
 import { ErrorAlert } from "@/components/ErrorAlert";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 function AgenticTerminal() {
   const [step, setStep] = useState(0);
@@ -21,7 +22,11 @@ function AgenticTerminal() {
   }, []);
 
   return (
-    <div className="mt-8 bg-[#001222] p-6 rounded-adyen font-mono text-sm border border-[#00d16a]/30 shadow-lg">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="mt-8 bg-[#001222] p-6 rounded-adyen font-mono text-sm border border-[#00d16a]/30 shadow-lg"
+    >
       <div className="flex items-center mb-4">
         <div className="w-2.5 h-2.5 rounded-full bg-red-500 mr-2"></div>
         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500 mr-2"></div>
@@ -34,12 +39,22 @@ function AgenticTerminal() {
         {step >= 2 && <p className="text-white"><span className="text-yellow-400">[Culture Fit Agent]</span>: Applying Multi-tasking & Team-player bonuses... <span className="text-[#00d16a]">Done</span></p>}
         {step >= 3 && <p className="text-white"><span className="text-orange-400">[Gemini AI Agent]</span>: Synthesizing final reasoning report from LLM... <span className="animate-pulse">_</span></p>}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function Home() {
   const { result, error, isGenerating, parsedData, parseAndMatch, clearResult } = useTeamMatching();
+  const outcomeRef = useRef<HTMLDivElement>(null);
+
+  // Auto scroll khi bắt đầu generate hoặc khi có kết quả/lỗi
+  useEffect(() => {
+    if (isGenerating || result || error) {
+      setTimeout(() => {
+        outcomeRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [isGenerating, result, error]);
 
   return (
     <main>
@@ -60,13 +75,17 @@ export default function Home() {
 
       {/* Result & Candidate Pool Band (Light) */}
       <SectionBand variant="light">
-        <div className="mb-12">
+        <div className="mb-12 scroll-mt-6" ref={outcomeRef}>
           <MonoEyebrow className="text-adyen-canvas mb-4">MATCHING RESULT</MonoEyebrow>
           <h2 className="text-[32px] font-medium text-adyen-canvas mb-8">Outcome.</h2>
 
           {/* Hiển thị các tag đã parse được nếu có */}
           {parsedData && (
-            <div className="mb-8 p-6 bg-white border border-gray-200 rounded-adyen shadow-sm">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="mb-8 p-6 bg-white border border-gray-200 rounded-adyen shadow-sm"
+            >
               <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Dữ liệu bóc tách từ Prompt:</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
@@ -92,10 +111,10 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
           
-          {error && <ErrorAlert error={error} />}
+          {error && <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}><ErrorAlert error={error} /></motion.div>}
           {isGenerating && <AgenticTerminal />}
           {result && !isGenerating && <ResultBoard result={result} />}
           {!error && !result && !isGenerating && (

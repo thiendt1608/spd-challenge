@@ -201,3 +201,10 @@
 * **Thời gian:** 2026-08-09 18:05:00
 * **Prompt:** `đổi api key thành key này giúp t: [HIDDEN_API_KEY] . lưu ý không lưu api key này vào chatlog nha. sẵn thì xoá luôn cái api key cũ đang bị leak ở chatlog`
 * **Response (Tóm tắt):** Hệ thống đã thực hiện quy trình bảo mật nghiêm ngặt. Thứ nhất, thay thế API Key cũ bằng Key mới của user vào các file source code. Thứ hai, thực hiện rà soát và xóa sạch API Key cũ bị leak trong nội dung `chatlog.md` (thay bằng `[HIDDEN_API_KEY]`), đồng thời xóa bỏ thư mục `.next` cache để đảm bảo Key cũ không còn tồn tại dưới bất kỳ dạng binary/cache nào. Đã rebuild project và push an toàn lên GitHub.
+
+---
+
+### Lượt 29
+* **Thời gian:** 2026-08-09 18:15:00
+* **Prompt:** `bạn adđ thư viện  motion thêm cho tôi 1 số chỗ như nhau - đầu tiên cái quan trọng nhật là add vào cái khi mà user nhập promt và content... chưa tự scroll xuống để dễ dàng theo dõi kq và cách scroll các card component cho nó mượt nhé`
+* **Response (Tóm tắt):** Hệ thống đã thực hiện đại tu toàn bộ Trải nghiệm người dùng (UX) bằng thư viện `framer-motion`. Đã cài đặt cơ chế tự động cuộn mượt mà (smooth auto-scroll) xuống phần Kết quả ngay khi AI bắt đầu phân tích prompt. Bổ sung các hiệu ứng animation cao cấp (stagger, fade-in, slide-up kiểu lò xo spring) cho hàng loạt Card ứng viên và Bảng phân tích AI. Giao diện giờ đây không chỉ thông minh mà còn chuyển động vô cùng "nịnh mắt", mang lại cảm giác của một sản phẩm SaaS đắt tiền. Đã fix lỗi Type và build thành công.
