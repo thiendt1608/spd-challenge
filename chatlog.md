@@ -236,3 +236,10 @@
 * **Thời gian:** 2026-08-09 18:55:00
 * **Prompt:** `hiện tại bằng cái góc nhìn của tôi hiện tại nó đang mắc kẹt vào góc phải. Hình như lúc nảy có lộn div rồi bạn thay vào các component laytout này nhé như rule lúc nảy tôi bảo bạn á class="absolute inset-0 z-0 pointer-events-auto"`
 * **Response (Tóm tắt):** Hệ thống đã phát hiện nguyên nhân component LaserFlow bị "mắc kẹt" hoặc không tương tác được: Do bị bọc trong một thẻ div thừa và bị layer content (z-10) che khuất event chuột. Đã xử lý triệt để bằng cách: 1) Gỡ bỏ div thừa, pass trực tiếp class `absolute inset-0 z-0 pointer-events-auto` thẳng vào LaserFlow. 2) Bật tính năng `pointer-events-none` cho vùng không gian trống của layout z-10 để chuột có thể "xuyên qua" và tương tác với hiệu ứng 3D bên dưới, trong khi vẫn giữ nguyên `pointer-events-auto` cho Form. Layout đã full màn và mượt mà.
+
+---
+
+### Lượt 34
+* **Thời gian:** 2026-08-09 19:05:00
+* **Prompt:** `bạn xoá các component mà tôi kêu bạn add vào đi rollback lại tình trạng cũ nha`
+* **Response (Tóm tắt):** Hệ thống đã thực hiện lệnh Rollback (Quay xe). Đã tiến hành gỡ bỏ sạch sẽ mọi dấu vết của hiệu ứng 3D trước đó để bảo toàn độ nhẹ và tính ổn định của layout nguyên bản: Gỡ component `LaserFlow`, xóa file CSS đi kèm, gỡ cài đặt thư viện `three` khỏi `package.json`, và khôi phục code của `SectionBand.tsx` về trạng thái nguyên thủy. Đã chạy lại `npm run build` thành công và push lên GitHub.
