@@ -121,7 +121,7 @@ function getAllValidCombinations(
   
   // Duyệt các size từ 1 đến maxMembers
   for (let k = 1; k <= maxMembers; k++) {
-    function backtrack(start: number, currentCombo: Candidate[]) {
+    const backtrack = (start: number, currentCombo: Candidate[]) => {
       if (currentCombo.length === k) {
         // Kiểm tra độ bao phủ 100%
         const coveredSkills = new Set(currentCombo.flatMap(c => c.skills));
