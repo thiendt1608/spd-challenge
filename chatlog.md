@@ -99,3 +99,10 @@
 * **Thời gian:** 2026-08-09 15:35:00
 * **Prompt:** `Object._fromJSON ... JSON.parse ... /dashboard dang bị lỗi rồi`
 * **Response (Tóm tắt):** AI đã phân tích callstack lỗi của Next.js (app-page.runtime.dev.js) và kiểm tra lại toàn bộ file JSON cũng như routing. Lỗi này được xác định là do bộ nhớ đệm (cache) Hot-Reload của Next.js bị crash khi cấu trúc file thay đổi quá lớn (di chuyển `page.tsx` sang `/dashboard`). Server dev đã được restart, xóa `.next` cache và xác nhận `/dashboard` build hoàn toàn thành công (HTTP 200) không có lỗi code. Khuyên user khởi động lại server dev ở máy local.
+
+---
+
+### Lượt 15
+* **Thời gian:** 2026-08-09 15:40:00
+* **Prompt:** `m cập nhật những thay đổi mới nhất về những gì m đã làm vào file AGENTS.md giúp t`
+* **Response (Tóm tắt):** AI đã tiến hành cập nhật toàn diện file `AGENTS.md` để phản ánh đúng hiện trạng dự án. Cụ thể: Bổ sung kiến trúc đa trang (SaaS) gồm Landing Page và Dashboard; Thêm mục Design System quy định chặt chẽ các ràng buộc của Adyen (màu `#00d16a`, nền `#001222`, viền `6px`, font `JetBrains Mono`); Nâng cấp mô tả thuật toán thành "Kiến trúc 2 giai đoạn" (Two-Stage Architecture) kèm cơ chế chấm điểm và cấu trúc dữ liệu "Siêu nhân" (Cheat code). Hoàn tất lưu log và push code.

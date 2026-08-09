@@ -1,16 +1,30 @@
 # Repository Guidelines
 
 ## Project Overview
-This repository hosts the solution for the **SPD Challenge 2026** (Team-Matching MVP). The goal is to build a frontend prototype capable of forming optimal teams based on complex constraints using mock data within a 6-hour hackathon timeframe. The repository is heavily constrained by an automated structure grader (`spd-public-structure-prompt.md`) which strictly enforces specific files at the root level.
+This repository hosts the solution for the **SPD Challenge 2026** (Team-Matching MVP). The goal is to build a full multi-page product (Marketing Landing Page + Manager Portal) capable of forming optimal teams based on complex constraints using mock data within a 6-hour hackathon timeframe. The repository is heavily constrained by an automated structure grader (`spd-public-structure-prompt.md`) which strictly enforces specific files at the root level.
 
 ## Architecture & Data Flow
-- **Architecture:** Frontend-heavy MVP (React/Next.js/Vue or plain HTML/JS). No real backend or database is required or recommended. 
+- **Architecture:** Next.js App Router structured as a complete SaaS product. 
+  - `/`: Public-facing Marketing Landing Page.
+  - `/dashboard`: Authenticated-style Manager Portal for the actual team matching tool.
+  - No real backend or database is required; logic runs client-side.
 - **Data Flow:** 
-  - Mock candidate data is loaded directly from a static `.json` file or Local Storage.
-  - User constraints are input via the UI.
-  - A Brute-force/Backtracking algorithm processes the constraints against the JSON data in memory.
-  - The UI updates dynamically to display matched teams or explicit error handling (why a match failed).
-- **AI Focus:** Do not architect complex backend abstractions. Focus purely on static data ingestion and rapid UI state reflection.
+  - Mock candidate data is loaded from `source/src/data/candidates.json`.
+  - User constraints are input via the UI in the Dashboard.
+  - A Two-Stage Algorithm (Pre-processing + Combinatorial Scoring) processes constraints against the JSON data.
+  - The UI updates dynamically to display matched teams, explicit error handling, and AI-generated reasoning text.
+- **AI Focus:** Do not architect complex backend abstractions. Focus purely on static data ingestion, deep client-side business logic, and strict adherence to design tokens.
+
+## Design System (Adyen Constraints)
+The UI strictly follows Adyen's marketing design language (`adyen.design.md`):
+- **Colors:** 
+  - Primary Accent (Mint Voltage): `#00d16a` (used sparingly for primary CTAs and indicator dots).
+  - Dark Canvas: `#001222` (navy-leaning black, used for hero bands and dark sections).
+- **Typography:** 
+  - Default Sans: `Inter` (used as a fallback for Adyen Sans).
+  - Eyebrows & Labels: `JetBrains Mono` (12px, uppercase, +0 tracking).
+- **Shapes:** Strictly `6px` border-radius (`0.375rem`) for EVERYTHING (buttons, cards, inputs). No exceptions.
+- **Rhythm:** Alternating dark (`#001222`) and light (`#f4f5f6` or `#ffffff`) full-bleed section bands. Flat design (no heavy drop shadows).
 
 ## Key Directories
 - `source/`: **[REQUIRED]** The main directory for all application source code. It must exist and contain at least one real file (not just `.gitkeep`).
@@ -25,7 +39,10 @@ This repository hosts the solution for the **SPD Challenge 2026** (Team-Matching
 ## Code Conventions & Common Patterns
 - **State Management:** Use simple component state (e.g., React `useState`/`useEffect`). The UI must dynamically react to constraint changes (Checkpoint 4 requirement).
 - **Error Handling Pattern:** **CRITICAL.** If no team can be matched, the matching engine MUST throw/return a specific error payload detailing exactly which constraint failed (e.g., "Missing skill X"). The UI must catch this and display a clear red alert, avoiding white screens or infinite loops.
-- **Algorithm Pattern:** Use Backtracking or a simple combinatorial loop to evaluate the 20 mock profiles. Do not use external AI APIs for the logic.
+- **Algorithm Pattern (Two-Stage Architecture):** 
+  1. **Pre-processing:** Filter out candidates with zero matching skills to reduce the search space.
+  2. **Backtracking & Scoring:** Generate all valid combinations, then score them based on *Multi-tasking* (rewarding smaller teams covering more skills) and *Redundancy Penalty* (punishing unnecessary skills). Output must include a generated `reasoning` string explaining the business value of the selection.
+- **Mock Data Strategy ("Cheat Code"):** Ensure `candidates.json` has a mix of "Supermen" (candidates with 4-5 skills) and "Specialists" (1 skill) to visually prove the algorithm's intelligence in optimizing headcount.
 - **Naming:** Keep paths explicit. Use lowercase for structure-required files (e.g., `submission.json`, `chatlog.md`).
 
 ## Important Files
