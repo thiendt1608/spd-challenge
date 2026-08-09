@@ -7,12 +7,12 @@ This repository hosts the solution for the **SPD Challenge 2026** (Team-Matching
 - **Architecture:** Next.js App Router structured as a complete SaaS product. 
   - `/`: Public-facing Marketing Landing Page.
   - `/dashboard`: Authenticated-style Manager Portal for the actual team matching tool.
-  - No real backend or database is required; logic runs client-side.
+  - No real backend or database is required; logic runs purely client-side to optimize hackathon time limit.
 - **Data Flow:** 
-  - Mock candidate data is loaded from `source/src/data/candidates.json`.
-  - User constraints are input via the UI in the Dashboard.
-  - A Two-Stage Algorithm (Pre-processing + Combinatorial Scoring) processes constraints against the JSON data.
-  - The UI updates dynamically to display matched teams, explicit error handling, and AI-generated reasoning text.
+  - Mock candidate data is loaded from `source/src/data/candidates.json` (Advanced Multi-variable Schema).
+  - Complex user constraints (Tech Stack, Languages, Availability, Max Members) are input via the UI in the Dashboard.
+  - A Two-Stage Algorithm (Pre-processing + Combinatorial Scoring) processes multi-variable constraints against the JSON data.
+  - The UI updates dynamically to display matched teams, explicit error handling, and AI-generated reasoning text explaining the optimal selection.
 - **AI Focus:** Do not architect complex backend abstractions. Focus purely on static data ingestion, deep client-side business logic, and strict adherence to design tokens.
 
 ## Design System (Adyen Constraints)
@@ -39,11 +39,13 @@ The UI strictly follows Adyen's marketing design language (`adyen.design.md`):
 ## Code Conventions & Common Patterns
 - **State Management:** Use simple component state (e.g., React `useState`/`useEffect`). The UI must dynamically react to constraint changes (Checkpoint 4 requirement).
 - **Error Handling Pattern:** **CRITICAL.** If no team can be matched, the matching engine MUST throw/return a specific error payload detailing exactly which constraint failed (e.g., "Missing skill X"). The UI must catch this and display a clear red alert, avoiding white screens or infinite loops.
-- **Algorithm Pattern (Two-Stage Architecture):** 
-  1. **Pre-processing:** Filter out candidates with zero matching skills to reduce the search space.
-  2. **Backtracking & Scoring:** Generate all valid combinations, then score them based on *Multi-tasking* (rewarding smaller teams covering more skills) and *Redundancy Penalty* (punishing unnecessary skills). Output must include a generated `reasoning` string explaining the business value of the selection.
-- **Mock Data Strategy ("Cheat Code"):** Ensure `candidates.json` has a mix of "Supermen" (candidates with 4-5 skills) and "Specialists" (1 skill) to visually prove the algorithm's intelligence in optimizing headcount.
-- **Naming:** Keep paths explicit. Use lowercase for structure-required files (e.g., `submission.json`, `chatlog.md`).
+- **Algorithm Pattern (Two-Stage Architecture - Multi-variable Edition):** 
+  1. **Pre-processing:** 
+     - Filter out candidates not in `"Available"` status.
+     - **Intersection Constraint:** Filter out candidates who do not match the exact Required Availability (Time constraints).
+     - **Set Cover Preparation:** Filter out candidates with zero matching attributes (across Tech Stack, Domains, and Languages) to reduce search space.
+  2. **Backtracking & Scoring:** Generate all valid combinations covering 100% of the Set Cover constraints. Score them based on *Multi-tasking* (rewarding smaller teams), *Redundancy Penalty* (punishing unnecessary skills), and *Culture Fit Bonus* (rewarding specific working styles like "Team player"). Output must include a generated `reasoning` string explaining the business value.
+- **Mock Data Strategy ("Cheat Code"):** Ensure `candidates.json` has an advanced schema (40 profiles: `tech_stack`, `domain_knowledge`, `languages`, `availability`, `status`) with a mix of "Supermen" (candidtates with 4-5 skills across all domains) and "Specialists" to visually prove the algorithm's intelligence in optimizing headcount.
 
 ## Important Files
 The automated grader checks strictly for these exact paths at `REPOSITORY_ROOT`. They are non-negotiable for a 20/20 structure score:
@@ -65,7 +67,7 @@ The automated grader checks strictly for these exact paths at `REPOSITORY_ROOT`.
 
 ## Testing & QA
 - **Testing Frameworks:** No formal testing framework (Jest/Vitest) is strictly required by the prompt. Time is better spent on the demo.
-- **QA Strategy:** QA is entirely visual and script-based for a 3-minute video.
+- **QA Strategy:** E2E Headless Browser testing script validates real-time UI changes. Final QA is visual and script-based for a 3-minute video.
 - **Checkpoints to Test Manually:**
   1. Input goals and constraints.
   2. Browse candidate pool.

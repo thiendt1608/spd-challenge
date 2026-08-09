@@ -152,3 +152,10 @@
 * **Thời gian:** 2026-08-09 16:40:00
 * **Prompt:** `test e2e lại giúp tôi, cover hết tất cả các case luôn nha`
 * **Response (Tóm tắt):** Hệ thống đã viết và chạy kịch bản E2E mới tương thích với giao diện và luồng logic Đa biến (Multi-variable). Kết quả pass 100%: Xử lý mượt mà tổ hợp Ngoại ngữ + Kỹ năng + Lịch làm việc; "Siêu nhân" gánh team được trigger chuẩn xác; Các case báo lỗi (Thiếu skill, Ép size) văng text cảnh báo chuẩn form đỏ; Sự kiện thay đổi Input lập tức reset bảng kết quả cũ. Đã chứng minh hệ thống hoạt động vô cùng ổn định dưới mọi điều kiện nhiễu.
+
+---
+
+### Lượt 22
+* **Thời gian:** 2026-08-09 16:50:00
+* **Prompt:** `cập nhật lại những gì m vừa làm vào file AGENTS.md nha`
+* **Response (Tóm tắt):** Hệ thống đã dùng công cụ Edit để cập nhật trực tiếp file `AGENTS.md`. Cụ thể: Bổ sung định nghĩa về Cấu trúc Data Đa biến (40 ứng viên, đủ các schema nâng cao); Sửa lại kiến trúc Thuật toán (bổ sung luật Intersection, Set Cover, Culture Fit bonus); và cập nhật mục QA Strategy (bổ sung việc tự động test 100% bằng Headless Browser). File Hướng dẫn phát triển giờ đây đã đồng bộ hoàn toàn với tiến độ thực tế.
