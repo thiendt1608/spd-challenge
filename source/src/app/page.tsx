@@ -16,9 +16,9 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0d1e2e] pointer-events-none" />
         
         <div className="relative z-10 flex flex-col items-center text-center max-w-[800px] mx-auto px-4">
-          <MonoEyebrow className="mb-8">INTELLIGENT TEAM FORMATION</MonoEyebrow>
+          <MonoEyebrow className="mb-8">ADYEN EMERGENCY SQUAD (AES)</MonoEyebrow>
           <h1 className="text-[48px] md:text-[64px] lg:text-[80px] font-medium leading-[1.02] tracking-tight mb-8">
-            Team-building you can bank on.
+            Thành lập Đội Đặc Nhiệm IT Cứu hộ Dự Án.
           </h1>
           <p className="text-xl md:text-2xl text-white/70 font-medium max-w-2xl mb-12">
             Adyen delivers the control, reliability, and expertise to match the perfect team for your most critical projects.

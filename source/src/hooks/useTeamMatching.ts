@@ -17,32 +17,97 @@ export interface MatchResult {
   team: Candidate[];
   roleMapping: Record<string, string>;
   reasoning: string;
+  maxMembers: number;
+}
+
+export interface ParsedConstraints {
+  maxMembers: number;
+  reqSkills: string[];
+  reqLangs: string[];
+  reqAvail: string[];
 }
 
 export function useTeamMatching() {
   const [result, setResult] = useState<MatchResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [parsedData, setParsedData] = useState<ParsedConstraints | null>(null);
 
-  const matchTeam = (
+  // Fallback regex parser just in case API fails
+  const fallbackRegexParse = (text: string): ParsedConstraints => {
+    const maxMembersMatch = text.match(/(\d+)\s*(người|thành viên|members|dev)/i);
+    const maxMembers = maxMembersMatch ? parseInt(maxMembersMatch[1], 10) : 5;
+    
+    const reqAvail: string[] = [];
+    if (text.match(/sáng/i)) reqAvail.push("Ca Sáng");
+    if (text.match(/chiều/i)) reqAvail.push("Ca Chiều");
+    if (text.match(/tối/i)) reqAvail.push("Ca Tối");
+    if (text.match(/cuối tuần/i)) reqAvail.push("Cuối tuần");
+    if (text.match(/full-time/i)) reqAvail.push("Full-time");
+
+    const reqLangs: string[] = [];
+    if (text.match(/tiếng anh/i)) reqLangs.push("Tiếng Anh");
+    if (text.match(/tiếng nhật/i)) reqLangs.push("Tiếng Nhật N2"); // mock approx
+
+    // dummy extraction for skills
+    const reqSkills: string[] = [];
+    const keywords = ["Python", "React", "Go", "Giao tiếp", "Sư phạm", "SQL", "Docker"];
+    keywords.forEach(k => {
+      if (text.toLowerCase().includes(k.toLowerCase())) reqSkills.push(k);
+    });
+
+    return { maxMembers, reqSkills, reqLangs, reqAvail };
+  };
+
+  const parseAndMatch = async (promptText: string) => {
+    setResult(null);
+    setError(null);
+    setParsedData(null);
+    setIsGenerating(true);
+
+    if (!promptText.trim()) {
+      setError("Vui lòng nhập yêu cầu đội hình.");
+      setIsGenerating(false);
+      return;
+    }
+
+    let parsed: ParsedConstraints;
+    try {
+      const res = await fetch('/api/parse-prompt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ promptText })
+      });
+      if (!res.ok) throw new Error("API Parse Failed");
+      parsed = await res.json();
+    } catch {
+      console.warn("Using Regex Fallback for parsing.");
+      parsed = fallbackRegexParse(promptText);
+    }
+    
+    // Simulate delay for UI agentic vibe
+    await new Promise(r => setTimeout(r, 1000));
+    setParsedData(parsed);
+
+    // Call the core matchmaking logic with parsed data
+    await matchTeam(parsed.reqSkills, parsed.reqLangs, parsed.reqAvail, parsed.maxMembers);
+  };
+
+  const matchTeam = async (
     requiredSkills: string[], 
     requiredLangs: string[], 
     requiredAvail: string[], 
     maxMembers: number
   ) => {
-    setResult(null);
-    setError(null);
-
     const allRequiredCover = [...requiredSkills, ...requiredLangs];
 
     if (allRequiredCover.length === 0 && requiredAvail.length === 0) {
-      setError("Vui lòng thêm ít nhất 1 yêu cầu (Kỹ năng, Ngoại ngữ hoặc Thời gian).");
+      setError("AI không tìm thấy yêu cầu cụ thể nào từ văn bản. Vui lòng mô tả rõ hơn.");
+      setIsGenerating(false);
       return;
     }
 
     // --- BƯỚC 1: TIỀN XỬ LÝ (PRE-PROCESSING) ---
-    // 1. Chỉ lấy những người "Available"
-    // 2. Phải thỏa mãn ràng buộc cứng giao nhau (Intersection): 
-    //    Nếu dự án yêu cầu "Ca Tối", thì cá nhân đó BẮT BUỘC phải có "Ca Tối" trong availability.
     let relevantCandidates = (candidatesData as unknown as Candidate[]).filter(c => c.status === "Available");
 
     if (requiredAvail.length > 0) {
@@ -51,51 +116,45 @@ export function useTeamMatching() {
       );
       if (relevantCandidates.length === 0) {
         setError(`Hệ thống vô nghiệm. Không có ai rảnh vào thời gian: ${requiredAvail.join(", ")}`);
+        setIsGenerating(false);
         return;
       }
     }
 
-    // 3. Lọc bỏ những người không có bất kỳ kỹ năng/ngôn ngữ nào khớp yêu cầu (nếu có yêu cầu cover)
     if (allRequiredCover.length > 0) {
       relevantCandidates = relevantCandidates.filter(c => {
         const cCaps = [...Object.keys(c.tech_stack), ...c.domain_knowledge, ...c.languages];
         return cCaps.some(cap => allRequiredCover.includes(cap));
       });
 
-      // Kiểm tra xem kho dữ liệu còn lại có đủ 100% kỹ năng/ngôn ngữ yêu cầu không
       const poolCaps = new Set(relevantCandidates.flatMap(c => [...Object.keys(c.tech_stack), ...c.domain_knowledge, ...c.languages]));
       const missingCaps = allRequiredCover.filter(cap => !poolCaps.has(cap));
       
       if (missingCaps.length > 0) {
         setError(`Hệ thống vô nghiệm. Kho dữ liệu đang thiếu hụt năng lực: ${missingCaps.join(", ")}`);
+        setIsGenerating(false);
         return;
       }
     }
 
     // --- BƯỚC 2: TÌM TẤT CẢ TỔ HỢP HỢP LỆ (STAGE 1 - BACKTRACKING) ---
-    // Tìm các team thỏa mãn allRequiredCover
     const validTeams = getAllValidCombinations(relevantCandidates, maxMembers, allRequiredCover);
 
     if (validTeams.length === 0) {
       setError(`Không tìm thấy tổ hợp. Giới hạn ${maxMembers} thành viên là quá ít để bao phủ 100% yêu cầu dự án.`);
+      setIsGenerating(false);
       return;
     }
 
     // --- BƯỚC 3: TỐI ƯU HÓA & XẾP HẠNG (STAGE 2 - SCORING) ---
     let bestTeam: Candidate[] = [];
     let bestScore = -Infinity;
-    
 
     for (const team of validTeams) {
-      // 1. Độ đa nhiệm: Team size càng nhỏ -> điểm càng cao
       const multiTaskingScore = 10 * (allRequiredCover.length === 0 ? 1 : allRequiredCover.length / team.length);
-      
-      // 2. Độ dư thừa: Tổng số năng lực của cả team - số năng lực thực sự cần
       const totalCapsInTeam = team.reduce((acc, c) => acc + Object.keys(c.tech_stack).length + c.domain_knowledge.length + c.languages.length, 0);
       const redundancy = totalCapsInTeam - allRequiredCover.length;
       const redundancyPenalty = 2 * redundancy;
-
-      // 3. Thưởng thêm nếu team có working_style tốt (vd Team player)
       const styleBonus = team.filter(c => c.working_style === "Team player").length * 5;
 
       const finalScore = multiTaskingScore - redundancyPenalty + styleBonus;
@@ -103,11 +162,9 @@ export function useTeamMatching() {
       if (finalScore > bestScore) {
         bestScore = finalScore;
         bestTeam = team;
-        
       }
     }
 
-    // --- BƯỚC 4: GIẢI THÍCH (EXPLAINABILITY) ---
     const roleMapping: Record<string, string> = {};
     for (const req of allRequiredCover) {
       const person = bestTeam.find(c => {
@@ -119,33 +176,37 @@ export function useTeamMatching() {
       }
     }
 
-    const roleCounts: Record<string, number> = {};
-    Object.values(roleMapping).forEach(name => {
-      roleCounts[name] = (roleCounts[name] || 0) + 1;
-    });
-    const supermen = Object.keys(roleCounts).filter(name => roleCounts[name] > 1);
-
-    let reasoning = `Đội hình lý tưởng (${bestTeam.length}/${maxMembers} người). Thỏa mãn 100% ràng buộc đa biến (Kỹ năng, Ngoại ngữ, Thời gian). `;
-    if (supermen.length > 0) {
-      reasoning += `AI đã ưu tiên chọn ${supermen.join(", ")} vì khả năng gánh vác đa nhiệm (${supermen.map(s => roleCounts[s]).join(", ")} roles), giúp tối ưu chi phí. `;
-    } else {
-      reasoning += `Các thành viên được phân bổ chuyên môn hóa cao. `;
+    try {
+      const response = await fetch('/api/generate-reasoning', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          team: bestTeam,
+          reqSkills: requiredSkills,
+          reqLangs: requiredLangs,
+          reqAvail: requiredAvail,
+          maxMembers
+        })
+      });
+      const data = await response.json();
+      
+      await new Promise(r => setTimeout(r, 1500));
+      
+      setResult({ team: bestTeam, roleMapping, reasoning: data.reasoning, maxMembers });
+    } catch {
+      setResult({ team: bestTeam, roleMapping, reasoning: "Đội hình lý tưởng đã được AI tự động phân bổ để tối ưu hóa nguồn lực và đảm bảo 100% yêu cầu dự án. (Lỗi kết nối Gemini API)", maxMembers });
+    } finally {
+      setIsGenerating(false);
     }
-    
-    const teamPlayers = bestTeam.filter(c => c.working_style === "Team player");
-    if (teamPlayers.length > 0) {
-      reasoning += `Điểm cộng văn hóa (Culture Fit): Có ${teamPlayers.length} thành viên mang working style "Team player". `;
-    }
-
-    setResult({ team: bestTeam, roleMapping, reasoning });
   };
 
   const clearResult = () => {
     setResult(null);
     setError(null);
+    setParsedData(null);
   };
 
-  return { result, error, matchTeam, clearResult };
+  return { result, error, isGenerating, parsedData, parseAndMatch, clearResult };
 }
 
 function getAllValidCombinations(
@@ -154,27 +215,18 @@ function getAllValidCombinations(
   requiredCaps: string[]
 ): Candidate[][] {
   const validTeams: Candidate[][] = [];
-  
   if (requiredCaps.length === 0) {
-    // Nếu chỉ ràng buộc thời gian, chọn ra những team tốt nhất từ pool
-    for(let k=1; k<=maxMembers; k++) {
-       // just return teams of size k. For simplicity, just return individuals.
-       pool.forEach(p => validTeams.push([p]));
-    }
+    for(let k=1; k<=maxMembers; k++) pool.forEach(p => validTeams.push([p]));
     return validTeams;
   }
-
   for (let k = 1; k <= maxMembers; k++) {
     const backtrack = (start: number, currentCombo: Candidate[]) => {
       if (currentCombo.length === k) {
         const coveredCaps = new Set(currentCombo.flatMap(c => [...Object.keys(c.tech_stack), ...c.domain_knowledge, ...c.languages]));
         const hasAll = requiredCaps.every(cap => coveredCaps.has(cap));
-        if (hasAll) {
-          validTeams.push([...currentCombo]);
-        }
+        if (hasAll) validTeams.push([...currentCombo]);
         return;
       }
-
       for (let i = start; i < pool.length; i++) {
         currentCombo.push(pool[i]);
         backtrack(i + 1, currentCombo);
@@ -183,6 +235,5 @@ function getAllValidCombinations(
     }
     backtrack(0, []);
   }
-
   return validTeams;
 }
