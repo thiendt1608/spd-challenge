@@ -16,7 +16,7 @@ export function SetupForm({ onMatch, onStateChange }: SetupFormProps) {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto space-y-6 bg-black/60 backdrop-blur-md p-8 rounded-adyen border border-white/20 shadow-2xl">
+    <div className="w-full max-w-3xl mx-auto space-y-6 bg-gray-800/70 backdrop-blur-md p-8 rounded-adyen border border-white/20 shadow-2xl">
       <div className="space-y-4 text-left">
         <Label className="text-white text-lg font-medium">Text-to-Team: Mô tả chi tiết đội hình bạn muốn tìm</Label>
         <textarea 
