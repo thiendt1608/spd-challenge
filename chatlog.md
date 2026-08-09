@@ -92,3 +92,10 @@
 * **Thời gian:** 2026-08-09 15:30:00
 * **Prompt:** `sao trang mất hết style và css vậy verify lại đi`
 * **Response (Tóm tắt):** AI đã tiến hành điều tra lỗi mất Style của trang web. Nguyên nhân được xác định là do sự xung đột giữa cú pháp màu sắc `oklch()` mới nhất của Shadcn UI và cấu hình đè màu trong file `tailwind.config.ts`, dẫn đến lỗi class `border-border` và `outline-ring/50` bị vô hiệu hóa. AI đã fix triệt để bằng cách map lại đúng biến CSS trong Tailwind config và gỡ bỏ rule gây lỗi opacity trong `globals.css`. Chạy `npm run build` xác nhận mọi style đã trở lại hoạt động bình thường, ghi log và push code.
+
+---
+
+### Lượt 14
+* **Thời gian:** 2026-08-09 15:35:00
+* **Prompt:** `Object._fromJSON ... JSON.parse ... /dashboard dang bị lỗi rồi`
+* **Response (Tóm tắt):** AI đã phân tích callstack lỗi của Next.js (app-page.runtime.dev.js) và kiểm tra lại toàn bộ file JSON cũng như routing. Lỗi này được xác định là do bộ nhớ đệm (cache) Hot-Reload của Next.js bị crash khi cấu trúc file thay đổi quá lớn (di chuyển `page.tsx` sang `/dashboard`). Server dev đã được restart, xóa `.next` cache và xác nhận `/dashboard` build hoàn toàn thành công (HTTP 200) không có lỗi code. Khuyên user khởi động lại server dev ở máy local.
