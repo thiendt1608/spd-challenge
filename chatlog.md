@@ -50,3 +50,10 @@
 * **Thời gian:** 2026-08-09 14:45:00
 * **Prompt:** `okay bây giờ bạn focus lại file đề bài @SPD-Challenge-2026-Official-Problem.md và tạo ra một cái file kết hoạch chi tiết, break down ra từng task nhỏ để hoàn thành nha`
 * **Response (Tóm tắt):** Dựa vào bài toán, AI đã phân tích và vạch ra chiến lược 6 giai đoạn (Phases) bao gồm: Setup thư mục theo yêu cầu chấm điểm, Tạo Mock Data, Viết thuật toán ghép đội (Backtracking), Xây dựng UI 2 cột, Kết nối State để tương tác động và Cuối cùng là test 5 checkpoint quay video. Kế hoạch này đã được lưu vào file `PLAN.md` và đồng bộ vào công cụ theo dõi task (`todo`). Cuối cùng, thực hiện commit & push theo đúng rule.
+
+---
+
+### Lượt 8
+* **Thời gian:** 2026-08-09 14:50:00
+* **Prompt:** `@adyen.design.md bạn add thêm constrains pj rồi bạn break nhỏ các bước implemnt hơn nữa nha đạt được đúng sự rõ ràng và clear lại lại - teckstack FE: Nextjs + tailwind + shadcn nha`
+* **Response (Tóm tắt):** AI đã đọc file thiết kế `adyen.design.md` và trích xuất các quy tắc UI cốt lõi (Dark canvas #001222, Mint voltage #00d16a, viền bo cứng 6px, font JetBrains Mono cho Eyebrow). Từ đó, AI lập ra file `IMPLEMENTATION_GUIDE.md` mới, chia nhỏ kế hoạch cũ thành các bước cực kỳ chi tiết (Granular) dựa trên stack Next.js, Tailwind, Shadcn. Đồng bộ lại hệ thống theo dõi task và thực hiện commit & push theo rule.
