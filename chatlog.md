@@ -187,3 +187,10 @@
 * **Thời gian:** 2026-08-09 17:45:00
 * **Prompt:** `hệ thống matching đang có một số vấn đề là nếu như cái tag t nhập là AI thì nếu các ứng viên kh có ai có tag AI thì sẽ không tìm thấy dù họ có các tag về AI như là RAG, Machine Learning, NLP... m nghĩ nên xử lí vấn đề này như nào?`
 * **Response (Tóm tắt):** Hệ thống đã đề xuất và triển khai giải pháp cực kỳ "não to": **AI Semantic Routing kết hợp Generalized Set Cover**. Chỉnh sửa API Prompt để biến AI thành một màng lọc ngữ nghĩa: Tự động gom nhóm các từ khóa chung chung (như "AI") thành một Array chứa các từ khóa tương đương có trong DB (RAG, Machine Learning). Đồng thời, nâng cấp cốt lõi của Thuật toán Backtracking từ "Bắt buộc có đủ các skill" thành "Bắt buộc có ít nhất 1 skill trong mỗi nhóm ngữ nghĩa". Lỗi không nhận diện được đồng nghĩa đã bị triệt tiêu hoàn toàn. App giờ thông minh ngang ngửa hệ thống tuyển dụng triệu đô. Đã test E2E mượt mà.
+
+---
+
+### Lượt 27
+* **Thời gian:** 2026-08-09 17:55:00
+* **Prompt:** `m sử dụng model llm "gemini-3.1-flash-lite" nham sử dụng model llm "gemini-3.1-flash-lite" cho project nha`
+* **Response (Tóm tắt):** Hệ thống đã thực hiện yêu cầu chuyển đổi Model LLM. Đã thay thế toàn bộ endpoint gọi API từ `gemini-1.5-flash` sang `gemini-3.1-flash-lite` trong cả 2 API Routes (`/api/parse-prompt` và `/api/generate-reasoning`) để đảm bảo hệ thống gọi đúng model theo ý user. Đã build lại project thành công và push lên GitHub.

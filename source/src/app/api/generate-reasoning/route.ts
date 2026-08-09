@@ -12,7 +12,7 @@ Yêu cầu dự án: Kỹ năng [${reqSkills.join(", ")}], Ngoại ngữ [${reqL
 
 Nhiệm vụ: Viết MỘT đoạn văn ngắn gọn (tối đa 4 câu) mang phong cách chuyên nghiệp, giải thích MẠNH MẼ lý do đội hình này là tối ưu nhất. Nhấn mạnh vào việc tối ưu nhân sự (nếu số người ít hơn giới hạn) và sự phù hợp về văn hóa (Team player). Không cần lặp lại danh sách tên hay kỹ năng dài dòng.`;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${GEMINI_API_KEY}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
