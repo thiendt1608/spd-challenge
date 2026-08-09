@@ -145,3 +145,10 @@
   3. Cập nhật UI Form (`SetupForm.tsx`) chia 3 khối riêng biệt: Chuyên môn & Domain, Ngoại ngữ, Thời gian rảnh.
   4. Redesign lại Card Ứng viên và Bảng kết quả để show trọn vẹn sự phức tạp của Data mới.
   5. Đã giải quyết xong các cảnh báo Type/Lint và `npm run build` thành công, lưu log và push code.
+
+---
+
+### Lượt 21
+* **Thời gian:** 2026-08-09 16:40:00
+* **Prompt:** `test e2e lại giúp tôi, cover hết tất cả các case luôn nha`
+* **Response (Tóm tắt):** Hệ thống đã viết và chạy kịch bản E2E mới tương thích với giao diện và luồng logic Đa biến (Multi-variable). Kết quả pass 100%: Xử lý mượt mà tổ hợp Ngoại ngữ + Kỹ năng + Lịch làm việc; "Siêu nhân" gánh team được trigger chuẩn xác; Các case báo lỗi (Thiếu skill, Ép size) văng text cảnh báo chuẩn form đỏ; Sự kiện thay đổi Input lập tức reset bảng kết quả cũ. Đã chứng minh hệ thống hoạt động vô cùng ổn định dưới mọi điều kiện nhiễu.
