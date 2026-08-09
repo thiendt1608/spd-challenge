@@ -7,12 +7,13 @@ This repository hosts the solution for the **SPD Challenge 2026** (Team-Matching
 - **Architecture:** Next.js App Router structured as a complete SaaS product. 
   - `/`: Public-facing Marketing Landing Page.
   - `/dashboard`: Authenticated-style Manager Portal for the actual team matching tool.
-  - No real backend or database is required; logic runs purely client-side to optimize hackathon time limit.
+  - Frontend connects to Next.js API Routes (`/api/parse-prompt`, `/api/generate-reasoning`) leveraging the Gemini LLM for NLP tasks, with robust regex fallbacks if offline.
 - **Data Flow:** 
-  - Mock candidate data is loaded from `source/src/data/candidates.json` (Advanced Multi-variable Schema).
-  - Complex user constraints (Tech Stack, Languages, Availability, Max Members) are input via the UI in the Dashboard.
-  - A Two-Stage Algorithm (Pre-processing + Combinatorial Scoring) processes multi-variable constraints against the JSON data.
-  - The UI updates dynamically to display matched teams, explicit error handling, and AI-generated reasoning text explaining the optimal selection.
+  - Mock candidate data is loaded from `source/src/data/candidates.json` (Advanced Multi-variable Schema with 40 profiles).
+  - **Text-to-Team Input:** Users type natural language prompts into a single textarea.
+  - **Semantic Parsing:** Gemini API extracts JSON constraints (`maxMembers`, `reqSkills`, `reqLangs`, `reqAvail`). Generic terms (e.g., "AI") are semantically mapped to an array of specific DB tags.
+  - **Generalized Set Cover Matching:** The Backtracking algorithm searches for combinations satisfying all semantic groups.
+  - **Agentic UI & Data Viz:** A simulated Terminal UI displays the AI workflow, followed by a `ResultBoard` with dynamic Progress Bars (Tech Coverage, Cost Efficiency, Culture Fit).
 - **AI Focus:** Do not architect complex backend abstractions. Focus purely on static data ingestion, deep client-side business logic, and strict adherence to design tokens.
 
 ## Design System (Adyen Constraints)
@@ -39,12 +40,13 @@ The UI strictly follows Adyen's marketing design language (`adyen.design.md`):
 ## Code Conventions & Common Patterns
 - **State Management:** Use simple component state (e.g., React `useState`/`useEffect`). The UI must dynamically react to constraint changes (Checkpoint 4 requirement).
 - **Error Handling Pattern:** **CRITICAL.** If no team can be matched, the matching engine MUST throw/return a specific error payload detailing exactly which constraint failed (e.g., "Missing skill X"). The UI must catch this and display a clear red alert, avoiding white screens or infinite loops.
-- **Algorithm Pattern (Two-Stage Architecture - Multi-variable Edition):** 
+- **Algorithm Pattern (Two-Stage Architecture - Generalized Semantic Edition):** 
   1. **Pre-processing:** 
      - Filter out candidates not in `"Available"` status.
      - **Intersection Constraint:** Filter out candidates who do not match the exact Required Availability (Time constraints).
-     - **Set Cover Preparation:** Filter out candidates with zero matching attributes (across Tech Stack, Domains, and Languages) to reduce search space.
-  2. **Backtracking & Scoring:** Generate all valid combinations covering 100% of the Set Cover constraints. Score them based on *Multi-tasking* (rewarding smaller teams), *Redundancy Penalty* (punishing unnecessary skills), and *Culture Fit Bonus* (rewarding specific working styles like "Team player"). Output must include a generated `reasoning` string explaining the business value.
+     - **Set Cover Preparation:** Filter out candidates who do not satisfy ANY of the required semantic skill/language groups.
+  2. **Generalized Set Cover & Scoring:** Generate combinations covering AT LEAST ONE skill in EVERY required semantic group (OR logic within groups, AND logic across groups). Score based on *Multi-tasking*, *Redundancy Penalty*, and *Culture Fit Bonus*. 
+  3. **Agentic Pipeline (LLM Reasoning):** Final team composition is sent to Gemini to synthesize a professional business reasoning text explaining the optimal selection.
 - **Mock Data Strategy ("Cheat Code"):** Ensure `candidates.json` has an advanced schema (40 profiles: `tech_stack`, `domain_knowledge`, `languages`, `availability`, `status`) with a mix of "Supermen" (candidtates with 4-5 skills across all domains) and "Specialists" to visually prove the algorithm's intelligence in optimizing headcount.
 
 ## Important Files
