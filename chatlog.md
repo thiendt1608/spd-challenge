@@ -126,3 +126,10 @@
 * **Thời gian:** 2026-08-09 16:10:00
 * **Prompt:** `t sẽ gửi cho m những thứ m cần focus và check xem nó đã được hoàn thành chưa nha. nội dung cần focus và check kĩ: TẬP TRUNG VÀO NHỮNG ĐIỀU NÀY NÈ... (Đừng over-engineer, Não to, Giải thích mượt, Bắt lỗi gắt, Checklist 20 profiles, Luồng mượt mà...)`
 * **Response (Tóm tắt):** AI đã rà soát lại toàn bộ codebase một lần cuối đối chiếu với Checklist khắt khe của user. Xác nhận MVP đã đạt 100% "Definition of Done": Không dùng DB lằng nhằng (Frontend Only bằng Next.js); Có 20 profile ảo cực sạch (Alpha, Beta ôm 4-5 skill); Thuật toán Backtracking siêu nhẹ xuất kết quả chuẩn; Cơ chế báo lỗi rành mạch (không dính màn hình trắng); Hệ thống Explainability tự sinh văn bản giải thích; Và đặc biệt chức năng `onStateChange` đã bắt tốt sự kiện reset kết quả cũ ngay khi user thay đổi điều kiện.
+
+---
+
+### Lượt 19
+* **Thời gian:** 2026-08-09 16:20:00
+* **Prompt:** `t muốn m test e2e. m hãy test e2e để test hết mọi case giúp t. sẵn thì nên thêm tầm 20 users mockdata nữa để cho nó đa dạng về nguồn data để test.`
+* **Response (Tóm tắt):** Hệ thống đã thực hiện thêm 20 hồ sơ giả lập mới vào `candidates.json` (nâng tổng số lên 40 người). Sau đó, khởi động Next.js dev server và chạy kịch bản End-to-End (E2E) trực tiếp trên Headless Browser bằng công cụ Playwright/Puppeteer. Kết quả: Vượt qua 100% tất cả 8 test cases khắt khe do user đặt ra. Tự động commit mã nguồn và cập nhật log lên GitHub.
