@@ -119,3 +119,10 @@
 * **Thời gian:** 2026-08-09 16:05:00
 * **Prompt:** `nội dung thông tin thật của team và cuộc thi đây: Software Production and Development Challenge 2026... Chào Nguyễn Quang Linh và Nguyễn Nho Chí Thiện... Đội syncx... TEAM CODE: TEAM-TPV2FP...`
 * **Response (Tóm tắt):** Hệ thống đã tiếp nhận thông tin thật của đội thi (Team: syncx, Thành viên: Nguyễn Quang Linh & Nguyễn Nho Chí Thiện, Code: TEAM-TPV2FP). Sau đó, tự động cập nhật lại toàn bộ thông tin này vào file `submission.json` để chuẩn bị cho việc nộp bài cuối cùng, đảm bảo tính hợp lệ. Đồng thời tiến hành lưu log, commit và push lên GitHub.
+
+---
+
+### Lượt 18
+* **Thời gian:** 2026-08-09 16:10:00
+* **Prompt:** `t sẽ gửi cho m những thứ m cần focus và check xem nó đã được hoàn thành chưa nha. nội dung cần focus và check kĩ: TẬP TRUNG VÀO NHỮNG ĐIỀU NÀY NÈ... (Đừng over-engineer, Não to, Giải thích mượt, Bắt lỗi gắt, Checklist 20 profiles, Luồng mượt mà...)`
+* **Response (Tóm tắt):** AI đã rà soát lại toàn bộ codebase một lần cuối đối chiếu với Checklist khắt khe của user. Xác nhận MVP đã đạt 100% "Definition of Done": Không dùng DB lằng nhằng (Frontend Only bằng Next.js); Có 20 profile ảo cực sạch (Alpha, Beta ôm 4-5 skill); Thuật toán Backtracking siêu nhẹ xuất kết quả chuẩn; Cơ chế báo lỗi rành mạch (không dính màn hình trắng); Hệ thống Explainability tự sinh văn bản giải thích; Và đặc biệt chức năng `onStateChange` đã bắt tốt sự kiện reset kết quả cũ ngay khi user thay đổi điều kiện.
