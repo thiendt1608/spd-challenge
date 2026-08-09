@@ -1,5 +1,11 @@
 {
-  "project_name": "SPD Challenge 2026 - Team Matching MVP",
-  "team": "Hackathon Team",
+  "project_name": "Team Matching MVP",
+  "competition": "Software Production and Development Challenge 2026",
+  "team_name": "syncx",
+  "team_code": "TEAM-TPV2FP",
+  "members": [
+    "Nguyễn Quang Linh",
+    "Nguyễn Nho Chí Thiện"
+  ],
   "description": "Multi-page product (Marketing Landing Page + Manager Portal) capable of forming optimal teams based on complex constraints using mock data."
 }
