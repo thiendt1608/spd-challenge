@@ -71,3 +71,10 @@
 * **Thời gian:** 2026-08-09 15:05:00
 * **Prompt:** `<system-reminder> You stopped with 17 incomplete todo item(s)... Please continue working on these tasks or mark them complete if finished.`
 * **Response (Tóm tắt):** AI tiếp tục thực hiện đầy đủ 17 task đã vạch ra: Khởi tạo project Next.js bằng npm, cài đặt config Tailwind + Shadcn UI với các quy tắc Adyen design (Mint color, viền 6px, JetBrains Mono eyebrow). Sau đó, build thuật toán Backtracking, tạo mock JSON (20 hồ sơ) và hoàn thiện các UI components (Form, CandidateGrid, ResultBoard, ErrorAlert). Đã xử lý tất cả các lỗi Linting và chạy `npm run build` thành công hoàn toàn. Cuối cùng, đánh dấu hoàn tất toàn bộ kế hoạch và push mã nguồn lên Github.
+
+---
+
+### Lượt 11
+* **Thời gian:** 2026-08-09 15:15:00
+* **Prompt:** `hiện tại cái trang web chỉ có thể cho chọn được số lượng thành viên và skill require thì việc đó chưa thể hiện được chiều sâu logic và bussiness ở trong đó bạn analyst về chiều sâu cũng như logic cho sp. đọc file @system-matching.md để lấy thêm context nha`
+* **Response (Tóm tắt):** AI đã phân tích tài liệu `@system-matching.md` và đồng ý rằng cần nâng cấp thuật toán thành "Kiến trúc 2 Giai đoạn" (Two-Stage Architecture) để tăng chiều sâu Business. AI đã chủ động viết lại `useTeamMatching.ts` (Thêm Pre-processing lọc data thừa, sinh toàn bộ tổ hợp, và chấm điểm Weighted Scoring dựa trên độ đa nhiệm & độ dư thừa). Data mock cũng được cấu trúc lại với các "Siêu nhân" (4-5 skills) để biểu diễn độ khôn của thuật toán. Giao diện được update để tự động sinh ra đoạn text AI Reasoning giải thích vì sao chọn team này. Thực hiện ghi log và push code.

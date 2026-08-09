@@ -5,10 +5,12 @@ export function ResultBoard({ result }: { result: MatchResult }) {
   return (
     <div className="mt-8 space-y-6">
       <div className="p-6 bg-adyen-canvas text-white rounded-adyen">
-        <h3 className="text-2xl font-medium mb-2">Ghép đội thành công</h3>
-        <p className="text-white/70">
-          Thuật toán đã tìm thấy đội hình tối ưu với {result.team.length} thành viên, bao phủ 100% các kỹ năng yêu cầu.
-        </p>
+        <h3 className="text-2xl font-medium mb-4">Ghép đội thành công</h3>
+        <div className="bg-white/10 p-4 rounded-adyen border border-white/20">
+          <p className="text-white/90 text-sm leading-relaxed font-mono">
+            {result.reasoning}
+          </p>
+        </div>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
